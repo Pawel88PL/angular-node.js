@@ -1,0 +1,14 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "projekt zaliczeniowy z przedmiotu JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paweł Staniul",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
