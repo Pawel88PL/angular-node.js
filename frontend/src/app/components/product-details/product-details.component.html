@@ -1,0 +1,105 @@
+<div class="product-details shadow-lg pt-3">
+    <div class="row my-4">
+        <div *ngIf="product.productId" class="col-sm-7">
+            <div [attr.id]="'carouselForProduct' + product.productId"
+                class="carousel carousel-details slide carousel-fade" data-bs-ride="carousel">
+                <div *ngIf="product.productImages && product.productImages.length > 1" class="carousel-indicators">
+                    <button *ngFor="let image of product.productImages; let i = index" type="button"
+                        [attr.data-bs-target]="'#carouselForProduct' + product.productId" [attr.data-bs-slide-to]="i"
+                        [class.active]="i === 0">
+                    </button>
+                </div>
+                <div class="carousel-inner">
+                    <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
+                        <div *ngFor="let image of product.productImages; let i = index" class="carousel-item"
+                            [class.active]="i === 0" data-bs-interval="4000">
+                            <img *ngIf="image" [src]=" apiBaseUrl + image.imagePath" class="d-block w-100 rounded-3"
+                                alt="{{ product.name }}" />
+                        </div>
+                    </a>
+                </div>
+                <button class="carousel-control-prev" type="button"
+                    [attr.data-bs-target]="'#carouselForProduct' + product.productId" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button"
+                    [attr.data-bs-target]="'#carouselForProduct' + product.productId" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-sm-5 p-4 text-center">
+            <div>
+                <h1>{{ product.name }}</h1>
+                <h2> {{ product.categoryName }} </h2>
+            </div>
+            <br />
+
+            <div class="text-center">
+                <h2 class="border shadow p-2 mb-3 rounded-3 w-75 mx-auto"> <span class="mobile">Cena:</span> {{ formattedPrice }}</h2>
+                <h2 class="border shadow p-2 mb-3 rounded-3 w-75 mx-auto"> <span class="mobile">Waga:</span> {{ product.weight }} g</h2>
+            </div>
+            <br />
+            <div class="availability">
+                <ng-container *ngIf="product?.amountAvailable === 0">
+                    <div class="row outOfOrder">
+                        <div class="col-9">
+                            <h3>Sprzedany</h3>
+                        </div>
+                        <div class="col-3">
+                            <img src="assets/images/outOfOrder.png" style="max-width: 40px">
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="product.amountAvailable > 0 && product.amountAvailable < 10">
+                    <div class="row smallAmount">
+                        <div class="col-9">
+                            <h3>Ograniczona ilość</h3>
+                        </div>
+                        <div class="col-3">
+                            <img src="assets/images/smallAmount.png" style="max-width: 40px">
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="product.amountAvailable >= 10">
+                    <div class="row available">
+                        <div class="col-9">
+                            <h3>Produkt dostępny!</h3>
+                        </div>
+                        <div class="col-3">
+                            <img src="assets/images/available.png" style="max-width: 40px">
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <br />
+            <hr />
+            <div>
+                <div>
+                    <button mat-raised-button type="submit" class="mb-3 addToCartButton w-100" (click)="onAddToCart()">
+                        <i class="bi bi-cart-plus"></i> Dodaj do koszyka
+                    </button>
+                </div>
+                <div>
+                    <h3>Lub zadzwoń i zamów pod nr tel:</h3>
+                    <h2>+48 570 436 579</h2>
+                </div>
+                <div *ngIf="authService.isLoggedIn() && authService.isAdmin()">
+                    <a mat-raised-button color="warn" [routerLink]="['/update', product.productId]"
+                        class="mt-2 w-100"><i class="bi bi-pen"></i> EDYTUJ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div *ngIf="product" class="description py-3 text-start" [innerHTML]="product.description">
+    </div>
+    <hr>
+
+</div>

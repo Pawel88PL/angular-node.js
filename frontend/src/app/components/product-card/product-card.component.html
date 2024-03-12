@@ -1,0 +1,60 @@
+<div *ngIf="product && product.productId">
+    <div class="card rounded-3 shadow-lg mb-2">
+        <div *ngIf="product.productImages && product.productImages.length > 0">
+            <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
+                <img [src]="apiBaseUrl + product.productImages[0].imagePath" loading="lazy"
+                    class="d-block w-100 rounded-3" alt="{{ product.name }}">
+            </a>
+        </div>
+
+        <div class="card-body">
+            <div>
+                <h3 class="card-title mb-3">{{ product?.name }}</h3>
+                <p><b>{{ product?.category?.name }}</b></p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <p>Waga: <b>{{ product?.weight }} g</b></p>
+                </div>
+                <div class="col-lg-6">
+                    <p>Cena: <b>{{ product?.price }} zł</b></p>
+                </div>
+
+                <ng-container *ngIf="product?.amountAvailable === 0">
+                    <div class="row outOfOrder">
+                        <div class="col-9">
+                            <h4>Sprzedany</h4>
+                        </div>
+                        <div class="col-3">
+                            <img src="assets/images/outOfOrder.png" style="max-width: 40px">
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="product?.amountAvailable > 0 && product?.amountAvailable < 10">
+                    <div class="row smallAmount">
+                        <div class="col-9">
+                            <h4>Ograniczona ilość</h4>
+                        </div>
+                        <div class="col-3">
+                            <img src="assets/images/smallAmount.png" style="max-width: 40px">
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="product?.amountAvailable >= 10">
+                    <div class="row available">
+                        <div class="col-9">
+                            <h4>Dostępny</h4>
+                        </div>
+                        <div class="col-3">
+                            <img src="assets/images/available.png" style="max-width: 40px">
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <button mat-raised-button (click)="onAddToCart()" class="add-to-cart-btn m-1 w-100">Dodaj do
+                koszyka</button>
+        </div>
+    </div>
+</div>

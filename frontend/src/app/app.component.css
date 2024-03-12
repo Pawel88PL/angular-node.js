@@ -1,0 +1,15 @@
+.main{
+  flex: 1;
+}
+
+@media (max-width: 767px) {
+  main {
+    margin-bottom: 6rem;
+  }
+}
+
+@media (max-width: 575px) {
+  main {
+    margin-bottom: 8rem;
+  }
+}

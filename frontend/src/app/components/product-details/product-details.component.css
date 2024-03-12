@@ -1,0 +1,51 @@
+.addToCartButton{
+    background-color: black;
+    color: white;
+}
+
+.product-details{
+    background-color: white;
+    border-radius: 10px;
+    margin: 3rem auto;
+    max-width: 1000px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 90%;
+}
+
+.description{
+    margin-bottom: 10rem;
+}
+
+h1{
+    font-size: 2rem;
+}
+
+h2{
+    font-size: 1.5rem;
+}
+
+.outOfOrder {
+    color: red;
+}
+
+.smallAmount {
+    color: orange;
+}
+
+.available {
+    color: green;
+}
+
+.carousel-details{
+    width: 75%;
+}
+
+@media (max-width: 768px) {
+  .carousel-details{
+    width: 100%;
+  }
+  .mobile{
+    display: none;
+  }
+}

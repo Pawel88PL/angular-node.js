@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Zamówienia
+        </div>
+        <div class="card-body mb-5">
+            <div *ngIf="isLoading" class="spinner-container">
+                <mat-spinner></mat-spinner>
+            </div>
+            <div *ngIf="!isLoading">
+                <div *ngIf="orders.length > 0; else noOrders">
+                    <table class="table table-hover table-responsive">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="smallScreenDisplayNone">Numer Zamówienia</th>
+                                <th class="smallScreenDisplayNone">Data</th>
+                                <th>Klient</th>
+                                <th>Odbiór osobisty</th>
+                                <th>Wartość</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of orders" (click)="viewOrderDetails(order.orderId)"
+                                [class.table-warning]="order.status === 'Oczekuje na płatność'"
+                                [class.table-success]="order.status === 'Opłacone'"
+                                [class.table-light]="order.status === 'W trakcie realizacji'"
+                                [class.table-info]="order.status === 'Wysłane'"
+                                [class.table-secondary]="order.status === 'Zrealizowane'"
+                                [class.table-danger]="order.status === 'Anulowane'" style="cursor: pointer;">
+                                <td class="smallScreenDisplayNone">{{ order.shortOrderId }}</td>
+                                <td class="smallScreenDisplayNone">{{ order.orderDate | date:'medium' }}</td>
+                                <td>{{ order.customerName }}</td>
+                                <td>
+                                    <span *ngIf="order.isPickupInStore; else no">{{ 'Tak' }}</span>
+                                    <ng-template #no>{{ 'Nie' }}</ng-template>
+                                </td>
+                                <td>{{ order.totalPrice | currency:'PLN' }}</td>
+                                <td>
+                                    <i *ngIf="order.status === 'Oczekuje na płatność'"
+                                        class="bi bi-clock-fill text-primary"></i>
+                                    <i *ngIf="order.status === 'Opłacone'" class="bi bi-cash-stack text-success"></i>
+                                    <i *ngIf="order.status === 'W trakcie realizacji'"
+                                        class="bi bi-hammer text-warning"></i>
+                                    <i *ngIf="order.status === 'Wysłane'" class="bi bi-truck text-info"></i>
+                                    <i *ngIf="order.status === 'Zrealizowane'"
+                                        class="bi bi-check-circle-fill text-success"></i>
+                                    <i *ngIf="order.status === 'Anulowane'" class="bi bi-x-circle-fill text-danger"></i>
+                                    {{ order.status }}
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <ng-template #noOrders>
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">Nie masz jeszcze żadnych zamówień!</h4>
+                        <p>Brak zamówień</p>
+                        <hr>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button mat-raised-button routerLink="/warehouse">Magazyn</button>
+        </div>
+    </div>
+</div>
