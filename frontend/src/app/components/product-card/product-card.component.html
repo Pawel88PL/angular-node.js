@@ -1,4 +1,4 @@
-<div *ngIf="product && product.productId">
+<div *ngIf="product && product.ProductId">
     <div class="card rounded-3 shadow-lg mb-2">
         <div *ngIf="product.productImages && product.productImages.length > 0">
             <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
@@ -9,18 +9,18 @@
 
         <div class="card-body">
             <div>
-                <h3 class="card-title mb-3">{{ product?.name }}</h3>
-                <p><b>{{ product?.category?.name }}</b></p>
+                <h3 class="card-title mb-3">{{ product?.Name }}</h3>
+                <p><b>{{ product?.category?.Name }}</b></p>
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <p>Waga: <b>{{ product?.weight }} g</b></p>
+                    <p>Waga: <b>{{ product?.Weight }} g</b></p>
                 </div>
                 <div class="col-lg-6">
-                    <p>Cena: <b>{{ product?.price }} zł</b></p>
+                    <p>Cena: <b>{{ product?.Price }} zł</b></p>
                 </div>
 
-                <ng-container *ngIf="product?.amountAvailable === 0">
+                <ng-container *ngIf="product?.AmountAvailable === 0">
                     <div class="row outOfOrder">
                         <div class="col-9">
                             <h4>Sprzedany</h4>
@@ -31,7 +31,7 @@
                     </div>
                 </ng-container>
 
-                <ng-container *ngIf="product?.amountAvailable > 0 && product?.amountAvailable < 10">
+                <ng-container *ngIf="product?.AmountAvailable > 0 && product?.AmountAvailable < 10">
                     <div class="row smallAmount">
                         <div class="col-9">
                             <h4>Ograniczona ilość</h4>
@@ -42,7 +42,7 @@
                     </div>
                 </ng-container>
 
-                <ng-container *ngIf="product?.amountAvailable >= 10">
+                <ng-container *ngIf="product?.AmountAvailable >= 10">
                     <div class="row available">
                         <div class="col-9">
                             <h4>Dostępny</h4>
