@@ -56,14 +56,14 @@ export class ProductListComponent implements OnInit {
   }
 
   get filteredProducts(): Product[] {
-    let filtered = !this.selectedCategory ? this.products : this.products.filter(p => p.categoryId === this.selectedCategory);
+    let filtered = !this.selectedCategory ? this.products : this.products.filter(p => p.CategoryId === this.selectedCategory);
 
     filtered = filtered.sort((a, b) => {
       switch (this.selectedSorting) {
-        case 'category': return (a.categoryId || 0) - (b.categoryId || 0);
-        case 'name_asc': return a.name?.localeCompare(b.name || '') || 0;
-        case 'price_asc': return a.price - b.price;
-        case 'price_desc': return b.price - a.price;
+        case 'category': return (a.CategoryId || 0) - (b.CategoryId || 0);
+        case 'name_asc': return a.Name?.localeCompare(b.Name || '') || 0;
+        case 'price_asc': return a.Price - b.Price;
+        case 'price_desc': return b.Price - a.Price;
         case 'available-desc': return b.amountAvailable - a.amountAvailable;
         default: return 0;
       }

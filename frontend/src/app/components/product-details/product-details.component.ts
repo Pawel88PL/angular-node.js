@@ -18,7 +18,6 @@ import { gsap } from 'gsap';
 export class ProductDetailsComponent implements OnInit {
   apiBaseUrl: string = environment.apiUrl;
   product: Product = new Product();
-  products: Product[] = [];
   formattedPrice: string = '';
 
   constructor(
@@ -32,13 +31,13 @@ export class ProductDetailsComponent implements OnInit {
 
   onAddToCart() {
     this.cartService.addToCart(this.product).subscribe((result) => {
-      const firstImage = this.product.productImages?.[0]?.imagePath;
+      const firstImage = this.product.ImagePath;
       this.dialog.open(CartItemDialogComponent, {
         maxWidth: '500px',
         data: {
           image: firstImage ? this.apiBaseUrl + firstImage : null,
-          name: this.product.name,
-          price: this.product.price
+          name: this.product.Name,
+          price: this.product.Price
         }
       });
     });
@@ -60,11 +59,13 @@ export class ProductDetailsComponent implements OnInit {
     if (idParm) {
       const id = +idParm;
       this.productService.getProductById(id).subscribe(
-        product => {
-          this.product = product
-          this.formattedPrice = this.product.price.toFixed(2) + ' zł';
+        (response) => {
+          this.product = response;
         },
-        error => console.log('Wystąpił problem ze znalezieniem:', error));
+        (error) => {
+          console.error('Wystąpił błąd podczas pobierania produktu', error);
+        }
+      );
     }
     else {
       this.router.navigate(['/']);

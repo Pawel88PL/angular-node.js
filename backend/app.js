@@ -10,7 +10,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({origin: 'http://localhost:4200'}));
 app.use(express.json());
-app.use('/api', productsController);
+app.use('/', productsController);
 
 const port = process.env.PORT
 

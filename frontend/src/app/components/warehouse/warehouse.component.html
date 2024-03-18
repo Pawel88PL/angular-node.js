@@ -24,20 +24,20 @@
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
-                <td class="smallScreenDisplayNone">{{ product?.categoryName}}</td>
-                <td><a mat-button [routerLink]="['/product', product.productId]"> {{ product?.name }}</a></td>
-                <td><b>{{ product?.price }}</b> zł</td>
+                <td class="smallScreenDisplayNone">{{ product?.CategoryName}}</td>
+                <td><a mat-button [routerLink]="['/product', product.ProductId]"> {{ product?.Name }}</a></td>
+                <td><b>{{ product?.Price }}</b> zł</td>
                 <td class="smallScreenDisplayNone"><b>{{ product?.weight }}</b> gram</td>
                 <td>
                     <strong *ngIf="product?.amountAvailable === 0">brak towaru</strong>
                     <p *ngIf="product.amountAvailable > 0"><b>{{ product?.amountAvailable }}</b> sztuk</p>
                 </td>
                 <td>
-                    <a mat-raised-button color="primary" [routerLink]="['/update', product?.productId]">EDYTUJ</a>
+                    <a mat-raised-button color="primary" [routerLink]="['/update', product?.ProductId]">EDYTUJ</a>
                 </td>
                 <td>
                     <button mat-raised-button color="warn" type="button"
-                        (click)="confirmDeleteAlert(product.productId)">USUŃ</button>
+                        (click)="confirmDeleteAlert(product.ProductId)">USUŃ</button>
                 </td>
             </tr>
         </tbody>

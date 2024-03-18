@@ -1,46 +1,25 @@
 <div class="product-details shadow-lg pt-3">
     <div class="row my-4">
-        <div *ngIf="product.productId" class="col-sm-7">
-            <div [attr.id]="'carouselForProduct' + product.productId"
-                class="carousel carousel-details slide carousel-fade" data-bs-ride="carousel">
-                <div *ngIf="product.productImages && product.productImages.length > 1" class="carousel-indicators">
-                    <button *ngFor="let image of product.productImages; let i = index" type="button"
-                        [attr.data-bs-target]="'#carouselForProduct' + product.productId" [attr.data-bs-slide-to]="i"
-                        [class.active]="i === 0">
-                    </button>
+        <div *ngIf="product.ProductId" class="col-sm-7">
+            <div class="product-image">
+                <div class="bg-image ripple">
+                    <img *ngIf="product.ImagePath" [src]="apiBaseUrl + product.ImagePath"
+                        class="d-block w-100 rounded-3" alt="{{ product.Name }}">
                 </div>
-                <div class="carousel-inner">
-                    <a [routerLink]="['/product', product.productId]" class="bg-image ripple">
-                        <div *ngFor="let image of product.productImages; let i = index" class="carousel-item"
-                            [class.active]="i === 0" data-bs-interval="4000">
-                            <img *ngIf="image" [src]=" apiBaseUrl + image.imagePath" class="d-block w-100 rounded-3"
-                                alt="{{ product.name }}" />
-                        </div>
-                    </a>
-                </div>
-                <button class="carousel-control-prev" type="button"
-                    [attr.data-bs-target]="'#carouselForProduct' + product.productId" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button"
-                    [attr.data-bs-target]="'#carouselForProduct' + product.productId" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
+
         </div>
 
         <div class="col-sm-5 p-4 text-center">
             <div>
-                <h1>{{ product.name }}</h1>
-                <h2> {{ product.categoryName }} </h2>
+                <h1>{{ product.Name }}</h1>
+                <h2>{{ product.CategoryName }}</h2>
             </div>
             <br />
 
             <div class="text-center">
-                <h2 class="border shadow p-2 mb-3 rounded-3 w-75 mx-auto"> <span class="mobile">Cena:</span> {{ formattedPrice }}</h2>
-                <h2 class="border shadow p-2 mb-3 rounded-3 w-75 mx-auto"> <span class="mobile">Waga:</span> {{ product.weight }} g</h2>
+                <h2 class="w-75 mx-auto"> <span class="mobile">Cena:</span> {{
+                    product.Price }} zł</h2>
             </div>
             <br />
             <div class="availability">
@@ -87,10 +66,10 @@
                 </div>
                 <div>
                     <h3>Lub zadzwoń i zamów pod nr tel:</h3>
-                    <h2>+48 570 436 579</h2>
+                    <h2>+48 111 222 333</h2>
                 </div>
                 <div *ngIf="authService.isLoggedIn() && authService.isAdmin()">
-                    <a mat-raised-button color="warn" [routerLink]="['/update', product.productId]"
+                    <a mat-raised-button color="warn" [routerLink]="['/update', product.ProductId]"
                         class="mt-2 w-100"><i class="bi bi-pen"></i> EDYTUJ</a>
                 </div>
             </div>

@@ -4,16 +4,16 @@ import { OrderDetails } from "./order-details.model";
 
 export class Product {
     amountAvailable = 0;
-    categoryId?: number;
-    categoryName?: string;
+    CategoryId?: number;
+    CategoryName?: string;
     dateAdded?: Date;
     description?: string;
-    name?: string;
+    Name: string = '';
     orderDetails?: OrderDetails[];
     popularity = 0;
-    price = 0;
+    Price: number = 0;
     priority = 0;
-    productId = 0;
-    productImages?: ProductImage[];
+    ProductId = 0;
+    ImagePath: string = '';
     weight = 0;
 }

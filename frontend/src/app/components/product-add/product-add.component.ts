@@ -71,7 +71,7 @@ export class ProductAddComponent implements OnInit {
             this.productService.createProduct(this.productForm.value, ImagePaths).subscribe(
               (product) => {
                 console.log('Produkt został dodany!', product);
-                this.router.navigate(['/product', product.productId]);
+                this.router.navigate(['/product', product.ProductId]);
               },
               (error) => {
                 console.error('Wystąpił błąd podczas dodawania produktu', error)
@@ -86,7 +86,7 @@ export class ProductAddComponent implements OnInit {
         this.productService.createProduct(this.productForm.value).subscribe(
           (product) => {
             console.log('Produkt został dodany!', product);
-            this.router.navigate(['/product', product.productId]);
+            this.router.navigate(['/product', product.ProductId]);
           },
           (error) => {
             console.error('Wystąpił błąd podczas dodawania produktu', error)

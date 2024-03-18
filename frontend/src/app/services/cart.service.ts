@@ -33,7 +33,7 @@ export class CartService {
     
     return this.http.post(this.cartItemUrl, {
       cartId: this.cartId,
-      productId: product.productId,
+      productId: product.ProductId,
       quantity: 1
     }).pipe(
       catchError(this.handleError)

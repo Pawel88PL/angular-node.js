@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent {
-  apiBaseUrl: string = environment.imagesUrl;
+  apiBaseUrl: string = environment.apiUrl;
   @Input() product: any;
 
   constructor(private cartService: CartService, private dialog: MatDialog) {}
