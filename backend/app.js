@@ -2,11 +2,12 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const productsController = require('./controllers/productsController');
 
 const app = express();
 
-// Konfiguracja CORS
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({origin: 'http://localhost:4200'}));
 app.use(express.json());
 app.use('/api', productsController);
