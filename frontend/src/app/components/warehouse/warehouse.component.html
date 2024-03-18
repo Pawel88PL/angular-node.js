@@ -29,8 +29,8 @@
                 <td><b>{{ product?.Price }}</b> zł</td>
                 <td class="smallScreenDisplayNone"><b>{{ product?.weight }}</b> gram</td>
                 <td>
-                    <strong *ngIf="product?.amountAvailable === 0">brak towaru</strong>
-                    <p *ngIf="product.amountAvailable > 0"><b>{{ product?.amountAvailable }}</b> sztuk</p>
+                    <strong *ngIf="product?.AmountAvailable === 0">brak towaru</strong>
+                    <p *ngIf="product.AmountAvailable > 0"><b>{{ product?.AmountAvailable }}</b> sztuk</p>
                 </td>
                 <td>
                     <a mat-raised-button color="primary" [routerLink]="['/update', product?.ProductId]">EDYTUJ</a>

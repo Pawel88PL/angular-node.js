@@ -64,7 +64,7 @@ export class ProductListComponent implements OnInit {
         case 'name_asc': return a.Name?.localeCompare(b.Name || '') || 0;
         case 'price_asc': return a.Price - b.Price;
         case 'price_desc': return b.Price - a.Price;
-        case 'available-desc': return b.amountAvailable - a.amountAvailable;
+        case 'available-desc': return b.AmountAvailable - a.AmountAvailable;
         default: return 0;
       }
     });

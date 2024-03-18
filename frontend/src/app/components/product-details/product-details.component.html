@@ -23,7 +23,7 @@
             </div>
             <br />
             <div class="availability">
-                <ng-container *ngIf="product?.amountAvailable === 0">
+                <ng-container *ngIf="product?.AmountAvailable === 0">
                     <div class="row outOfOrder">
                         <div class="col-9">
                             <h3>Sprzedany</h3>
@@ -34,7 +34,7 @@
                     </div>
                 </ng-container>
 
-                <ng-container *ngIf="product.amountAvailable > 0 && product.amountAvailable < 10">
+                <ng-container *ngIf="product.AmountAvailable > 0 && product.AmountAvailable < 10">
                     <div class="row smallAmount">
                         <div class="col-9">
                             <h3>Ograniczona ilość</h3>
@@ -45,7 +45,7 @@
                     </div>
                 </ng-container>
 
-                <ng-container *ngIf="product.amountAvailable >= 10">
+                <ng-container *ngIf="product.AmountAvailable >= 10">
                     <div class="row available">
                         <div class="col-9">
                             <h3>Produkt dostępny!</h3>
@@ -77,7 +77,7 @@
     </div>
     <hr>
 
-    <div *ngIf="product" class="description py-3 text-start" [innerHTML]="product.description">
+    <div *ngIf="product" class="description py-3 text-start" [innerHTML]="product.Description">
     </div>
     <hr>
 

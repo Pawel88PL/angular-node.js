@@ -27,7 +27,7 @@ export class CartService {
   }
 
   private addItemToCart(product: Product): Observable<any> {
-    if (product.amountAvailable < 1) {
+    if (product.AmountAvailable < 1) {
       return throwError(() => new Error('Produkt jest niedostępny.'));
     }
     

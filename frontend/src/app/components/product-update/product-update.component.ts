@@ -80,10 +80,8 @@ export class ProductUpdateComponent implements OnInit {
       categoryId: [this.product.CategoryId, Validators.required],
       name: [this.product.Name, Validators.required],
       price: [this.product.Price, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      weight: [this.product.weight, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      amountAvailable: [this.product.amountAvailable, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      priority: [this.product.priority, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      description: [this.product.description, Validators.required],
+      amountAvailable: [this.product.AmountAvailable, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
+      description: [this.product.Description, Validators.required],
     })
   }
 
