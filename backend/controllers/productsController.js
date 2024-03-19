@@ -1,44 +1,39 @@
-const express = require('express');
-const router = express.Router();
-const dbService = require('../services/dbService');
+const { Product, Category } = require('../config/dbConfig');
 
 // Pobieranie wszystkich produktów
-router.get('/products', async (req, res) => {
+exports.getProducts = async (req, res) => {
     try {
-        // Zaktualizowane zapytanie SQL, aby dołączyć nazwę kategorii do każdego produktu
-        const query = `
-            SELECT Products.*, Categories.Name AS CategoryName
-            FROM Products
-            JOIN Categories ON Products.CategoryId = Categories.CategoryId
-        `;
-        const result = await dbService.querySql(query, []);
-        res.json(result);
-    } catch (err) {
-        console.error('Błąd podczas pobierania produktów:', err);
+        const products = await Product.findAll({
+            include: [{
+                model: Category,
+                as: 'category' // Alias zdefiniowany w modelu Product, w relacji do Category
+            }]
+        });
+        res.json(products);
+    } catch (error) {
+        console.error('Błąd podczas pobierania produktów:', error);
         res.status(500).send('Błąd podczas pobierania produktów');
     }
-});
+};
 
 // Pobieranie produktu na podstawie ID
-router.get('/products/:id', async (req, res) => {
+exports.getProductById = async (req, res) => {
     try {
-        const { id } = req.params; // Pobranie ID produktu z parametrów ścieżki
-        const query = `
-            SELECT Products.*, Categories.Name AS CategoryName
-            FROM Products
-            JOIN Categories ON Products.CategoryId = Categories.CategoryId
-            WHERE Products.ProductId = ?
-        `;
-        const result = await dbService.querySql(query, [id]);
-        if (result.length > 0) {
-            res.json(result[0]); // Zwraca pierwszy (i jedyny) produkt w wynikach zapytania
+        const { id } = req.params;
+        const product = await Product.findByPk(id, {
+            include: [{
+                model: Category,
+                as: 'category' // Alias zdefiniowany w modelu Product, w relacji do Category
+            }]
+        });
+
+        if (product) {
+            res.json(product);
         } else {
             res.status(404).send('Produkt nie został znaleziony.');
         }
-    } catch (err) {
-        console.error('Błąd podczas pobierania produktu:', err);
+    } catch (error) {
+        console.error('Błąd podczas pobierania produktu:', error);
         res.status(500).send('Błąd serwera podczas pobierania produktu.');
     }
-});
-
-module.exports = router;
+};

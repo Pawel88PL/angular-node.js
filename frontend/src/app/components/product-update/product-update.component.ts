@@ -25,10 +25,11 @@ export class ProductUpdateComponent implements OnInit {
     private router: Router
   ) { }
 
-  deleteImage(ImagePath: string): void {
-    this.productService.deleteImage(ImagePath).subscribe(
+  deleteImage(imageId: string): void {
+    this.productService.deleteImage(imageId).subscribe(
       () => {
         console.log('Zdjęcie zostało pomyślnie usunięte.');
+        
       },
       error => {
         console.error('Wystąpił błąd podczas usuwania zdjęcia:', error);
@@ -77,11 +78,11 @@ export class ProductUpdateComponent implements OnInit {
 
   initializeForm(): void {
     this.productForm = this.fb.group({
-      categoryId: [this.product.CategoryId, Validators.required],
-      name: [this.product.Name, Validators.required],
-      price: [this.product.Price, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      amountAvailable: [this.product.AmountAvailable, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      description: [this.product.Description, Validators.required],
+      categoryId: [this.product.categoryId, Validators.required],
+      name: [this.product.name, Validators.required],
+      price: [this.product.price, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
+      amountAvailable: [this.product.amountAvailable, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
+      description: [this.product.description, Validators.required],
     })
   }
 
@@ -98,10 +99,10 @@ export class ProductUpdateComponent implements OnInit {
 
             const ImagePaths = response.files;
 
-            this.productService.updateProduct(this.product.ProductId, this.productForm.value, ImagePaths).subscribe(
+            this.productService.updateProduct(this.product.productId, this.productForm.value, ImagePaths).subscribe(
               (product) => {
                 console.log('Pomyślnie zmieniono dane produktu!', product);
-                this.router.navigate(['/product', product.ProductId]);
+                this.router.navigate(['/product', product.productId]);
               },
               (error) => {
                 console.error('Wystąpił błąd podczas aktualizacji produktu', error)
@@ -113,10 +114,10 @@ export class ProductUpdateComponent implements OnInit {
           }
         );
       } else {
-        this.productService.updateProduct(this.product.ProductId, this.productForm.value).subscribe(
+        this.productService.updateProduct(this.product.productId, this.productForm.value).subscribe(
           (product) => {
             console.log('Pomyślnie zmieniono dane produktu!', product);
-            this.router.navigate(['/product', product.ProductId]);
+            this.router.navigate(['/product', product.productId]);
           },
           (error) => {
             console.error('Wystąpił błąd podczas aktualizacji produktu', error)

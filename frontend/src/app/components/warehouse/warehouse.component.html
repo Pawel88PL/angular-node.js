@@ -16,7 +16,6 @@
                 <th scope="col" class="smallScreenDisplayNone">Kategoria</th>
                 <th scope="col">Nazwa produktu</th>
                 <th scope="col">Cena</th>
-                <th scope="col" class="smallScreenDisplayNone">Waga</th>
                 <th scope="col">Dostępna ilość</th>
                 <th scope="col">Edytuj</th>
                 <th scope="col">Usuń</th>
@@ -24,20 +23,19 @@
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
-                <td class="smallScreenDisplayNone">{{ product?.CategoryName}}</td>
-                <td><a mat-button [routerLink]="['/product', product.ProductId]"> {{ product?.Name }}</a></td>
-                <td><b>{{ product?.Price }}</b> zł</td>
-                <td class="smallScreenDisplayNone"><b>{{ product?.weight }}</b> gram</td>
+                <td class="smallScreenDisplayNone">{{ product.category.name}}</td>
+                <td><a mat-button [routerLink]="['/product', product.productId]"> {{ product?.name }}</a></td>
+                <td><b>{{ product.price }}</b> zł</td>
                 <td>
-                    <strong *ngIf="product?.AmountAvailable === 0">brak towaru</strong>
-                    <p *ngIf="product.AmountAvailable > 0"><b>{{ product?.AmountAvailable }}</b> sztuk</p>
+                    <strong *ngIf="product?.amountAvailable === 0">brak towaru</strong>
+                    <p *ngIf="product.amountAvailable > 0"><b>{{ product?.amountAvailable }}</b> sztuk</p>
                 </td>
                 <td>
-                    <a mat-raised-button color="primary" [routerLink]="['/update', product?.ProductId]">EDYTUJ</a>
+                    <a mat-raised-button color="primary" [routerLink]="['/update', product?.productId]">EDYTUJ</a>
                 </td>
                 <td>
                     <button mat-raised-button color="warn" type="button"
-                        (click)="confirmDeleteAlert(product.ProductId)">USUŃ</button>
+                        (click)="confirmDeleteAlert(product.productId)">USUŃ</button>
                 </td>
             </tr>
         </tbody>

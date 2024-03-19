@@ -31,13 +31,13 @@ export class ProductDetailsComponent implements OnInit {
 
   onAddToCart() {
     this.cartService.addToCart(this.product).subscribe((result) => {
-      const firstImage = this.product.ImagePath;
+      const firstImage = this.product.imagePath;
       this.dialog.open(CartItemDialogComponent, {
         maxWidth: '500px',
         data: {
           image: firstImage ? this.apiBaseUrl + firstImage : null,
-          name: this.product.Name,
-          price: this.product.Price
+          name: this.product.name,
+          price: this.product.price
         }
       });
     });

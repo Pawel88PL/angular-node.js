@@ -32,7 +32,7 @@ export class WarehouseComponent implements OnInit {
     if (window.confirm('Czy na pewno chcesz usunąć ten produkt?')) {
       this.productService.deleteProduct(productId).subscribe(
         () => {
-          this.products = this.products.filter(product => product.ProductId !== productId);
+          this.products = this.products.filter(product => product.productId !== productId);
           alert('Produkt został usunięty z bazy danych!');
         },
         error => {

@@ -27,13 +27,13 @@ export class CartService {
   }
 
   private addItemToCart(product: Product): Observable<any> {
-    if (product.AmountAvailable < 1) {
+    if (product.amountAvailable < 1) {
       return throwError(() => new Error('Produkt jest niedostępny.'));
     }
     
     return this.http.post(this.cartItemUrl, {
       cartId: this.cartId,
-      productId: product.ProductId,
+      productId: product.productId,
       quantity: 1
     }).pipe(
       catchError(this.handleError)

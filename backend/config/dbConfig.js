@@ -1,15 +1,17 @@
-require('dotenv').config();
-const mysql = require('mysql2/promise');
+const { Sequelize } = require('sequelize');
+const setupModelAssociations = require('../models/modelAssociations');
 
-// Konfiguracja połączenia z bazą danych MySQL
-const pool = mysql.createPool({
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    dialect: 'mysql',
+    logging: console.log
 });
 
-module.exports = pool;
+
+const Product = require('../models/product.model')(sequelize, Sequelize.DataTypes);
+const Category = require('../models/category.model')(sequelize, Sequelize.DataTypes);
+const User = require('../models/user.model')(sequelize, Sequelize.DataTypes);
+
+setupModelAssociations({sequelize, Product, Category});
+
+module.exports = { sequelize, Product, Category, User};
