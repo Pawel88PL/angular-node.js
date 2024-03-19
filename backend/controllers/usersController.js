@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs');
-const User = require('../models/user.model'); // Upewnij się, że ścieżka do modelu użytkownika jest poprawna
+const { User } = require('../config/dbConfig');
 
 exports.register = async (req, res) => {
     try {
-        const { email, password, name, surname } = req.body;
+        const { email, password, name, surname, city, street, address, phoneNumber, postalCode, termsAccepted } = req.body;
 
         // Sprawdzenie, czy użytkownik o takim emailu już istnieje
         const userExists = await User.findOne({ where: { email } });
@@ -18,8 +18,14 @@ exports.register = async (req, res) => {
         const newUser = await User.create({
             email,
             password: hashedPassword,
-            name,
-            surname
+            firstname: name,
+            lastname: surname,
+            city,
+            street,
+            address,
+            postalCode,
+            phoneNumber,
+            termsAccepted
         });
 
         res.status(201).send({ message: "Użytkownik został pomyślnie zarejestrowany.", userId: newUser.id });

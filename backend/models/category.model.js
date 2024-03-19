@@ -5,14 +5,14 @@ module.exports = (sequelize, DataTypes) => {
 
     Category.init({
         // Definicje pól...
-        CategoryId: {
+        categoryId: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
             field: 'CategoryId'
         },
-        Name: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
             field: 'Name'

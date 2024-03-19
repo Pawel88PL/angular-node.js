@@ -1,6 +1,14 @@
+const Sequelize = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define('User', {
-        // Definiowanie pól modelu
+    class User extends Sequelize.Model { }
+    
+    User.init({
+        userId: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -13,17 +21,43 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        name: {
+        firstname: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        surname: {
+        lastname: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        // Dodaj inne pola zgodnie z potrzebami
+        city: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        street: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        address: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        postalCode: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        phoneNumber: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        termsAccepted: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
     }, {
-        // opcjonalne ustawienia modelu
+        sequelize,
+        modelName: 'User',
+        tableName: 'Users',
+        timestamps: false
     });
 
     return User;

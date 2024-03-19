@@ -76,9 +76,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         },
         error => {
           this.loading = false;
-          let errorMsg = 'Wystąpił błąd podczas próby rejestracji!';
-          if (error.error && typeof error.error === 'string') {
-            errorMsg = error.error;
+          let errorMsg = 'Wystąpił błąd podczas próby rejestracji.';
+          if (error.error.message) {
+            errorMsg = error.error.message;
           }
           this.snackBar.open(errorMsg, 'Zamknij', { duration: 3000 });
         }
