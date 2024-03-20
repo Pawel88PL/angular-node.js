@@ -1,4 +1,3 @@
-// Opis: Model produktu w bazie danych
 module.exports = (sequelize, DataTypes) => {
     const Product = sequelize.define('Product',
         {

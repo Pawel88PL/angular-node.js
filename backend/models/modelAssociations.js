@@ -1,4 +1,4 @@
-function setupModelAssociations({ Product, Category }) {
+function setupProductCategory({ Product, Category }) {
     // Produkt należy do jednej Kategorii
     Product.belongsTo(Category, {
         as: 'category',
@@ -12,4 +12,4 @@ function setupModelAssociations({ Product, Category }) {
     });
 }
 
-module.exports = setupModelAssociations;
+module.exports = setupProductCategory;

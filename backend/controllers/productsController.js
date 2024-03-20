@@ -1,14 +1,8 @@
-const { Product, Category } = require('../config/dbConfig');
+const { getProducts, getProductById } = require('../services/productsService');
 
-// Pobieranie wszystkich produktów
 exports.getProducts = async (req, res) => {
     try {
-        const products = await Product.findAll({
-            include: [{
-                model: Category,
-                as: 'category' // Alias zdefiniowany w modelu Product, w relacji do Category
-            }]
-        });
+        const products = await getProducts();
         res.json(products);
     } catch (error) {
         console.error('Błąd podczas pobierania produktów:', error);
@@ -16,17 +10,9 @@ exports.getProducts = async (req, res) => {
     }
 };
 
-// Pobieranie produktu na podstawie ID
 exports.getProductById = async (req, res) => {
     try {
-        const { id } = req.params;
-        const product = await Product.findByPk(id, {
-            include: [{
-                model: Category,
-                as: 'category' // Alias zdefiniowany w modelu Product, w relacji do Category
-            }]
-        });
-
+        const product = await getProductById(req.params.id);
         if (product) {
             res.json(product);
         } else {
