@@ -1,4 +1,15 @@
-const { getProducts, getProductById } = require('../services/productsService');
+const { createProduct, getProducts, getProductById } = require('../services/productsService');
+
+exports.addProduct = async (req, res) => {
+    try {
+        const productData = req.body;
+        const product = await createProduct(productData);
+        res.status(201).json(product);
+    } catch (error) {
+        console.error('Wystąpił błąd podczas dodawania produktu:', error);
+        res.status(500).send({ message: 'Wystąpił błąd podczas dodawania produktu.' });
+    }
+};
 
 exports.getProducts = async (req, res) => {
     try {

@@ -83,6 +83,7 @@ export class ProductUpdateComponent implements OnInit {
       price: [this.product.price, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
       amountAvailable: [this.product.amountAvailable, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
       description: [this.product.description, Validators.required],
+      weight: [this.product.weight, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
     })
   }
 

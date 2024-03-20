@@ -1,5 +1,10 @@
 const { Product, Category } = require('../config/dbConfig');
 
+const createProduct = async (productData) => {
+    const product = await Product.create(productData);
+    return product;
+};
+
 const getProducts = async () => {
     return await Product.findAll({
         include: [{
@@ -19,6 +24,7 @@ const getProductById = async (id) => {
 };
 
 module.exports = {
+    createProduct,
     getProducts,
     getProductById,
 };

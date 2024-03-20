@@ -13,4 +13,5 @@ export class Product {
     popularity:number = 0;
     price: number = 0;
     productId = 0;
+    weight: number = 0;
 }

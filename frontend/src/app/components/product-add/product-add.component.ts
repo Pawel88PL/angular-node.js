@@ -50,7 +50,6 @@ export class ProductAddComponent implements OnInit {
       price: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
       weight: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
       amountAvailable: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
-      priority: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
       description: ['', Validators.required],
     })
   }

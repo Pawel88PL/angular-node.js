@@ -26,6 +26,13 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 field: 'Price'
             },
+            // Data dodania
+            dateAdded: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                field: 'DateAdded',
+                defaultValue: DataTypes.NOW
+            },
             // Dostępna ilość
             amountAvailable: {
                 type: DataTypes.INTEGER,
