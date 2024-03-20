@@ -50,6 +50,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.BOOLEAN,
                 allowNull: false
             },
+            roles: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: 'Client'
+            }
         }, {
         sequelize,
         modelName: 'User',

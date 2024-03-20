@@ -25,9 +25,9 @@ export class AuthService {
           this.setName(res.name);
         };
         localStorage.setItem('userId', res.userId);
-        if (this.cartService.cartId) {
-          this.cartService.assignCartToUser(res.userId).subscribe();
-        }
+        //if (this.cartService.cartId) {
+        //  this.cartService.assignCartToUser(res.userId).subscribe();
+        //}
       }),
       catchError(error => {
         let message = 'Wystąpił błąd podczas logowania';
