@@ -1,4 +1,4 @@
-const { createProduct, getProducts, getProductById } = require('../services/productsService');
+const { createProduct, deleteProduct, getProducts, getProductById } = require('../services/productsService');
 
 exports.addProduct = async (req, res) => {
     try {
@@ -8,6 +8,17 @@ exports.addProduct = async (req, res) => {
     } catch (error) {
         console.error('Wystąpił błąd podczas dodawania produktu:', error);
         res.status(500).send({ message: 'Wystąpił błąd podczas dodawania produktu.' });
+    }
+};
+
+exports.deleteProductById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await deleteProduct(id);
+        res.status(200).send({ message: 'Produkt został usunięty.' });
+    } catch (error) {
+        console.error('Błąd podczas usuwania produktu:', error);
+        res.status(500).send({ message: 'Wystąpił błąd podczas usuwania produktu.' });
     }
 };
 

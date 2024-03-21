@@ -5,6 +5,14 @@ const createProduct = async (productData) => {
     return product;
 };
 
+const deleteProduct = async (id) => {
+    const productToDelete = await Product.findByPk(id);
+    if (!productToDelete) {
+        throw new Error('Produkt nie został znaleziony.');
+    }
+    await productToDelete.destroy();
+};
+
 const getProducts = async () => {
     return await Product.findAll({
         include: [{
@@ -25,6 +33,7 @@ const getProductById = async (id) => {
 
 module.exports = {
     createProduct,
+    deleteProduct,
     getProducts,
     getProductById,
 };
