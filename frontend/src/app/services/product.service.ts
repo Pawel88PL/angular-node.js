@@ -13,7 +13,7 @@ export class ProductService {
 
   private apiBaseUrl = environment.apiUrl;
   private productsUrl = `${this.apiBaseUrl}/products`;
-  private mediaUrl = `${this.apiBaseUrl}/media`;
+  private filesUrl = `${this.apiBaseUrl}/files`;
 
   constructor(private http: HttpClient) { }
 
@@ -22,15 +22,15 @@ export class ProductService {
       ...productData,
       ImagePaths: imagePaths
     }
-    return this.http.post<Product>(this.productsUrl, payload);
+    return this.http.post<Product>(`${this.productsUrl}/add`, payload);
   }
 
   deleteProduct(id: number): Observable<void> {
-    return this.http.post<void>(`${this.productsUrl}/delete/${id}`, {});
+    return this.http.delete<void>(`${this.productsUrl}/${id}`, {});
   }
 
   deleteImage(id: number): Observable<void> {
-    return this.http.post<void>(`${this.mediaUrl}/delete/${id}`, {});
+    return this.http.delete<void>(`${this.filesUrl}/${id}`, {});
   }
 
   getProductById(id: number): Observable<Product> {
@@ -50,6 +50,6 @@ export class ProductService {
   }
 
   uploadProductImages(data: FormData): Observable<any> {
-    return this.http.post(this.mediaUrl, data);
+    return this.http.post(this.filesUrl, data);
   }
 }

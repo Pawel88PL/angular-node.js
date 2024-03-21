@@ -1,17 +1,61 @@
+const { sequelize } = require('../config/dbConfig');
 const { Product, Category, ProductImage } = require('../config/dbConfig');
 
+const addProductWithImages = async (productData, imagePaths) => {
+    // Rozpoczęcie transakcji
+    const transaction = await sequelize.transaction();
+    try {
+        // Tworzenie nowego produktu
+        const newProduct = await Product.create({
+            // Przypisanie danych produktu
+            categoryId: productData.categoryId,
+            name: productData.name,
+            price: productData.price,
+            weight: productData.weight,
+            amountAvailable: productData.amountAvailable,
+            description: productData.description,
+        }, { transaction });
 
-const createProduct = async (productData) => {
-    const product = await Product.create(productData);
-    return product;
+        // Przygotowanie danych obrazów do zapisu
+        const imagesData = imagePaths.map(imagePath => ({
+            productId: newProduct.productId,
+            imagePath: imagePath
+        }));
+
+        // Zapis obrazów do bazy danych
+        await ProductImage.bulkCreate(imagesData, { transaction });
+
+        // Zatwierdzenie transakcji
+        await transaction.commit();
+        return newProduct;
+    } catch (error) {
+        // Wycofanie transakcji w przypadku błędu
+        await transaction.rollback();
+        throw error;
+    }
 };
 
 const deleteProduct = async (id) => {
-    const productToDelete = await Product.findByPk(id);
-    if (!productToDelete) {
-        throw new Error('Produkt nie został znaleziony.');
+    const transaction = await sequelize.transaction();
+
+    try {
+        // Najpierw usuń wszystkie powiązane obrazy produktu
+        await ProductImage.destroy({
+            where: { ProductId: id },
+            transaction: transaction
+        });
+
+        // Następnie usuń produkt
+        await Product.destroy({
+            where: { ProductId: id },
+            transaction: transaction
+        });
+
+        await transaction.commit();
+    } catch (error) {
+        await transaction.rollback();
+        throw error;
     }
-    await productToDelete.destroy();
 };
 
 const getProducts = async () => {
@@ -53,7 +97,7 @@ const updateProduct = async (id, productData) => {
 
 
 module.exports = {
-    createProduct,
+    addProductWithImages,
     deleteProduct,
     getProducts,
     getProductById,

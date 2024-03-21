@@ -1,16 +1,14 @@
-const
-    {
-        createProduct,
-        deleteProduct,
-        getProducts,
-        getProductById,
-        updateProduct
-    } = require('../services/productsService');
+
+const { addProductWithImages, deleteProduct, getProducts, getProductById, updateProduct } = require('../services/productsService');
+
 
 exports.addProduct = async (req, res) => {
     try {
+        
         const productData = req.body;
-        const product = await createProduct(productData);
+        const imagePaths = productData.ImagePaths || [];
+        const product = await addProductWithImages(productData, imagePaths);
+
         res.status(201).json(product);
     } catch (error) {
         console.error('Wystąpił błąd podczas dodawania produktu:', error);
