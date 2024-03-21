@@ -80,7 +80,7 @@ export class ProductUpdateComponent implements OnInit {
     this.productForm = this.fb.group({
       categoryId: [this.product.categoryId, Validators.required],
       name: [this.product.name, Validators.required],
-      price: [this.product.price, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
+      price: [this.product.price, [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$"), Validators.min(0)]],
       amountAvailable: [this.product.amountAvailable, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],
       description: [this.product.description, Validators.required],
       weight: [this.product.weight, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],

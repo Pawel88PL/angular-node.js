@@ -1,4 +1,11 @@
-const { createProduct, deleteProduct, getProducts, getProductById } = require('../services/productsService');
+const
+    {
+        createProduct,
+        deleteProduct,
+        getProducts,
+        getProductById,
+        updateProduct
+    } = require('../services/productsService');
 
 exports.addProduct = async (req, res) => {
     try {
@@ -43,5 +50,16 @@ exports.getProductById = async (req, res) => {
     } catch (error) {
         console.error('Błąd podczas pobierania produktu:', error);
         res.status(500).send('Błąd serwera podczas pobierania produktu.');
+    }
+};
+
+exports.updateProductById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedProduct = await updateProduct(id, req.body);
+        res.status(200).json(updatedProduct);
+    } catch (error) {
+        console.error('Błąd podczas aktualizacji produktu:', error);
+        res.status(500).send({ message: 'Wystąpił błąd podczas aktualizacji produktu.' });
     }
 };

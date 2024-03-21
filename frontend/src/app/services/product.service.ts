@@ -46,7 +46,7 @@ export class ProductService {
       ...productData,
       ImagePaths: imagePaths
     }
-    return this.http.post<Product>(`${this.productsUrl}/${id}`, payload);
+    return this.http.put<Product>(`${this.productsUrl}/${id}`, payload);
   }
 
   uploadProductImages(data: FormData): Observable<any> {

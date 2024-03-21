@@ -26,6 +26,12 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 field: 'Price'
             },
+            // Waga
+            weight: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                field: 'Weight'
+            },
             // Data dodania
             dateAdded: {
                 type: DataTypes.DATE,

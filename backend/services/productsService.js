@@ -1,5 +1,6 @@
 const { Product, Category } = require('../config/dbConfig');
 
+
 const createProduct = async (productData) => {
     const product = await Product.create(productData);
     return product;
@@ -31,9 +32,20 @@ const getProductById = async (id) => {
     });
 };
 
+const updateProduct = async (id, productData) => {
+    const productToUpdate = await Product.findByPk(id);
+    if (!productToUpdate) {
+        throw new Error('Produkt nie został znaleziony.');
+    }
+    await productToUpdate.update(productData);
+    return productToUpdate;
+};
+
+
 module.exports = {
     createProduct,
     deleteProduct,
     getProducts,
     getProductById,
+    updateProduct
 };
