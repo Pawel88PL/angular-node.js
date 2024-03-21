@@ -19,7 +19,7 @@ export class ProductCardComponent {
 
   onAddToCart() {
     this.cartService.addToCart(this.product).subscribe(() => {
-      const firstImage = this.product.imagePath;
+      const firstImage = this.product.productImages[0].imagePath;
       this.dialog.open(CartItemDialogComponent, {
         maxWidth: '500px',
         data: {

@@ -60,13 +60,15 @@
         </div>
         <div class="col-md-4">
             <h3 class="text-center">Zdjęcia produktu:</h3>
-            <div class="row mb-2">
-                <div class="col">
-                    <img *ngIf="product.imagePath" [src]="apiBaseUrl + product.imagePath" class="d-block w-100 px-3 rounded-3"
-                        alt="{{ product.name }}" />
-                </div>
-                <div class="col">
-                    <button (click)="deleteImage(product.imagePath)" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+            <div *ngFor="let image of product.productImages">
+                <div class="row mb-2">
+                    <div class="col">
+                        <img *ngIf="image" [src]="apiBaseUrl + image.imagePath" class="d-block w-100 px-3 rounded-3"
+                            alt="{{ product.name }}" />
+                    </div>
+                    <div class="col">
+                        <button (click)="deleteImage(image.imageId)" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                    </div>
                 </div>
             </div>
         </div>

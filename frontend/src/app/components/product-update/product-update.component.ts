@@ -25,11 +25,11 @@ export class ProductUpdateComponent implements OnInit {
     private router: Router
   ) { }
 
-  deleteImage(imageId: string): void {
+  deleteImage(imageId: number): void {
     this.productService.deleteImage(imageId).subscribe(
       () => {
         console.log('Zdjęcie zostało pomyślnie usunięte.');
-        
+        this.product.productImages = this.product?.productImages?.filter(image => image.imageId !== imageId);
       },
       error => {
         console.error('Wystąpił błąd podczas usuwania zdjęcia:', error);

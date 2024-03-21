@@ -31,7 +31,7 @@ export class ProductDetailsComponent implements OnInit {
 
   onAddToCart() {
     this.cartService.addToCart(this.product).subscribe((result) => {
-      const firstImage = this.product.imagePath;
+      const firstImage = this.product.productImages[0].imagePath;
       this.dialog.open(CartItemDialogComponent, {
         maxWidth: '500px',
         data: {

@@ -29,8 +29,8 @@ export class ProductService {
     return this.http.post<void>(`${this.productsUrl}/delete/${id}`, {});
   }
 
-  deleteImage(ImagePath: string): Observable<void> {
-    return this.http.post<void>(`${this.mediaUrl}/delete/${ImagePath}`, {});
+  deleteImage(id: number): Observable<void> {
+    return this.http.post<void>(`${this.mediaUrl}/delete/${id}`, {});
   }
 
   getProductById(id: number): Observable<Product> {

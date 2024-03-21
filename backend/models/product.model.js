@@ -44,11 +44,6 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 field: 'AmountAvailable'
-            },
-            // Ścieżka do obrazka
-            imagePath: {
-                type: DataTypes.STRING,
-                field: 'ImagePath'
             }
         }, {
         sequelize,

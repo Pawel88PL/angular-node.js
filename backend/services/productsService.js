@@ -1,4 +1,4 @@
-const { Product, Category } = require('../config/dbConfig');
+const { Product, Category, ProductImage } = require('../config/dbConfig');
 
 
 const createProduct = async (productData) => {
@@ -16,19 +16,29 @@ const deleteProduct = async (id) => {
 
 const getProducts = async () => {
     return await Product.findAll({
-        include: [{
-            model: Category,
-            as: 'category'
-        }]
+        include: [
+            {
+                model: Category,
+                as: 'category'
+            }, {
+                model: ProductImage,
+                as: 'productImages'
+            }
+        ]
     });
 };
 
 const getProductById = async (id) => {
     return await Product.findByPk(id, {
-        include: [{
-            model: Category,
-            as: 'category'
-        }]
+        include: [
+            {
+                model: Category,
+                as: 'category'
+            }, {
+                model: ProductImage,
+                as: 'productImages'
+            }
+        ]
     });
 };
 

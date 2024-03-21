@@ -1,4 +1,4 @@
-function setupProductCategory({ Product, Category }) {
+function setupModelAssociations({ Product, Category, ProductImage }) {
     // Produkt należy do jednej Kategorii
     Product.belongsTo(Category, {
         as: 'category',
@@ -10,6 +10,12 @@ function setupProductCategory({ Product, Category }) {
         as: 'products',
         foreignKey: 'categoryId',
     });
+
+    // Produkt może mieć wiele Obrazów
+    Product.hasMany(ProductImage, {
+        as: 'productImages',
+        foreignKey: 'productId',
+    });
 }
 
-module.exports = setupProductCategory;
+module.exports = setupModelAssociations;
