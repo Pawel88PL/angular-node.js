@@ -16,12 +16,11 @@ exports.uploadFiles = async (req, res) => {
 
 exports.deleteFile = async (req, res) => {
     try {
-        // Pobranie nazwy pliku z parametrów URL
         const { id } = req.params;
-        await filesService.deleteFile(id);
-        res.status(200).send({ message: 'Plik został usunięty pomyślnie.' });
+        const result = await filesService.deleteFile(id);
+        res.status(200).send(result);
     } catch (error) {
-        console.error('Błąd podczas usuwania pliku:', error);
-        res.status(500).send({ message: 'Wystąpił błąd podczas usuwania pliku.' });
+        console.error('Błąd podczas usuwania obrazka:', error);
+        res.status(500).send({ message: 'Wystąpił błąd podczas usuwania obrazka.' });
     }
 };

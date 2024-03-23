@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { ProductImage } = require('../config/dbConfig');
 
 // Folder, w którym będą przechowywane przesłane pliki
 const UPLOADS_DIR = 'public/images';
@@ -16,19 +17,30 @@ const uploadFiles = async (files) => {
 };
 
 // Funkcja do usuwania plików
-const deleteFile = async (filename) => {
-    const filePath = path.join(__dirname, UPLOADS_DIR, filename);
+const deleteFile = async (imageId) => {
+    try {
+        // Najpierw znajdź obrazek w bazie danych
+        const image = await ProductImage.findByPk(imageId);
 
-    return new Promise((resolve, reject) => {
-        fs.unlink(filePath, (err) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve({ message: 'Plik został usunięty.' });
-            }
-        });
-    });
+        if (!image) {
+            throw new Error('Obrazek nie został znaleziony.');
+        }
+
+        // Ścieżka do pliku
+        const filePath = path.join(__dirname, '..', 'public', image.imagePath);
+        // Usuń plik z systemu plików
+        fs.unlinkSync(filePath);
+
+        // Usuń wpis z bazy danych
+        await image.destroy();
+
+        return { message: 'Obrazek został usunięty.' };
+    } catch (err) {
+        console.error('Błąd podczas usuwania obrazka:', err);
+        throw err; // Przekaż błąd dalej do obsługi na wyższym poziomie
+    }
 };
+
 
 module.exports = {
     uploadFiles,
