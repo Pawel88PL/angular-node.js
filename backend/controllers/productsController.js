@@ -1,5 +1,5 @@
 
-const { addProductWithImages, deleteProduct, getProducts, getProductById, updateProduct } = require('../services/productsService');
+const { addProductWithImages, deleteProduct, getProducts, getProductById, updateProductWithImages } = require('../services/productsService');
 
 
 exports.addProduct = async (req, res) => {
@@ -54,7 +54,8 @@ exports.getProductById = async (req, res) => {
 exports.updateProductById = async (req, res) => {
     try {
         const { id } = req.params;
-        const updatedProduct = await updateProduct(id, req.body);
+        const { ImagePaths, ...productData } = req.body;
+        const updatedProduct = await updateProductWithImages(id, productData, ImagePaths || []);
         res.status(200).json(updatedProduct);
     } catch (error) {
         console.error('Błąd podczas aktualizacji produktu:', error);

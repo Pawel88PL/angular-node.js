@@ -86,20 +86,41 @@ const getProductById = async (id) => {
     });
 };
 
-const updateProduct = async (id, productData) => {
-    const productToUpdate = await Product.findByPk(id);
-    if (!productToUpdate) {
-        throw new Error('Produkt nie został znaleziony.');
-    }
-    await productToUpdate.update(productData);
-    return productToUpdate;
-};
+const updateProductWithImages = async (id, productData, imagePaths) => {
+    const transaction = await sequelize.transaction();
+    try {
+        // Wyszukanie produktu do zaktualizowania
+        const productToUpdate = await Product.findByPk(id, { transaction });
+        if (!productToUpdate) {
+            throw new Error('Produkt nie został znaleziony.');
+        }
 
+        // Aktualizacja produktu z danymi z formularza
+        await productToUpdate.update(productData, { transaction });
+
+        // Przygotowanie danych nowych obrazów do zapisu
+        const imagesData = imagePaths.map(imagePath => ({
+            productId: id,
+            imagePath: imagePath
+        }));
+
+        // Dodanie nowych obrazów do bazy danych
+        await ProductImage.bulkCreate(imagesData, { transaction });
+
+        // Zatwierdzenie transakcji
+        await transaction.commit();
+        return productToUpdate;
+    } catch (error) {
+        // Wycofanie transakcji w przypadku błędu
+        await transaction.rollback();
+        throw error;
+    }
+};
 
 module.exports = {
     addProductWithImages,
     deleteProduct,
     getProducts,
     getProductById,
-    updateProduct
+    updateProductWithImages
 };
