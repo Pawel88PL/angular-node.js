@@ -9,10 +9,10 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Kategoria</mat-label>
                             <mat-select formControlName="categoryId">
-                                <mat-option value="1">Miód naturalny</mat-option>
-                                <mat-option value="2">Miód samakowy</mat-option>
-                                <mat-option value="3">Zestaw miodów</mat-option>
-                                <mat-option value="4">Produkt pszczeli</mat-option>
+                                <mat-option *ngFor="let category of categories"
+                                    [value]="category.categoryId.toString()">
+                                    {{ category.name }}</mat-option>
+
                             </mat-select>
                         </mat-form-field>
 
@@ -67,7 +67,8 @@
                             alt="{{ product.name }}" />
                     </div>
                     <div class="col">
-                        <button (click)="deleteImage(image.imageId)" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                        <button (click)="deleteImage(image.imageId)" class="btn btn-danger"><i
+                                class="bi bi-trash3"></i></button>
                     </div>
                 </div>
             </div>

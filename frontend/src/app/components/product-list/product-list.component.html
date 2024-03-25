@@ -52,6 +52,10 @@
                     <div *ngIf="isLoading" class="loading-spinner">
                         <mat-spinner></mat-spinner>
                     </div>
+                    <div *ngIf="dbConnectionError" class="alert-warning">
+                        <h2>Sprawdź połączenie z bazą danych</h2>
+                        <h3>{{ dbConnectionError }}</h3>
+                    </div>
 
                 </div>
             </div>

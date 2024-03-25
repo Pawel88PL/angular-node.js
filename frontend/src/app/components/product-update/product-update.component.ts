@@ -17,6 +17,13 @@ export class ProductUpdateComponent implements OnInit {
   product: Product = new Product();
   productForm!: FormGroup;
   selectedFiles: FileList | null = null;
+  categories = [
+    { categoryId: 1, name: 'Meble kuchenne' },
+    { categoryId: 2, name: 'Meble do sypialni' },
+    { categoryId: 3, name: 'Meble do salonu' },
+    { categoryId: 4, name: 'Meble do gabinetu' }
+  ];
+
 
   constructor(
     private fb: FormBuilder,
@@ -78,7 +85,7 @@ export class ProductUpdateComponent implements OnInit {
 
   initializeForm(): void {
     this.productForm = this.fb.group({
-      categoryId: [this.product.categoryId, Validators.required],
+      categoryId: [this.product.categoryId.toString(), Validators.required],
       name: [this.product.name, Validators.required],
       price: [this.product.price, [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$"), Validators.min(0)]],
       amountAvailable: [this.product.amountAvailable, [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]],

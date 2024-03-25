@@ -15,6 +15,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   selectedCategory: number | null = null;
   selectedSorting: string | null = null;
+  dbConnectionError: string = '';
 
 
   constructor(private productService: ProductService) { }
@@ -45,11 +46,14 @@ export class ProductListComponent implements OnInit {
     this.isLoading = true;
     this.productService.getProducts().subscribe(
       (products) => {
-        this.products = products;
-        this.isLoading = false;
+        setTimeout(() => {
+          this.isLoading = false;
+          this.products = products;
+        }, 2000);
       },
       error => {
         console.error("Błąd podczas pobierania produktów:", error);
+        this.dbConnectionError = error.message;
         this.isLoading = false;
       }
     );
