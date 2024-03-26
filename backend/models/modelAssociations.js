@@ -1,19 +1,33 @@
-function setupModelAssociations({ Product, Category, ProductImage }) {
-    // Produkt należy do jednej Kategorii
+function setupModelAssociations({ Product, Category, ProductImage, Cart, CartItem }) {
+    // Relacje dla Product, Category, i ProductImage
     Product.belongsTo(Category, {
         as: 'category',
         foreignKey: 'categoryId',
     });
-
-    // Kategoria może mieć wiele Produktów
     Category.hasMany(Product, {
         as: 'products',
         foreignKey: 'categoryId',
     });
-
-    // Produkt może mieć wiele Obrazów
     Product.hasMany(ProductImage, {
         as: 'productImages',
+        foreignKey: 'productId',
+    });
+
+    // Relacje dla Cart i CartItem
+    Cart.hasMany(CartItem, {
+        as: 'cartItems',
+        foreignKey: 'cartId',
+    });
+    CartItem.belongsTo(Cart, {
+        as: 'cart',
+        foreignKey: 'cartId',
+    });
+    CartItem.belongsTo(Product, {
+        as: 'product',
+        foreignKey: 'productId',
+    });
+    Product.hasMany(CartItem, {
+        as: 'cartItems',
         foreignKey: 'productId',
     });
 }
