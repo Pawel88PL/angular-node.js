@@ -64,8 +64,8 @@ export class CartService {
   }
 
   removeItem(cartId: string, productId: number): Observable<any> {
-    const payload = { productId: productId, cartId: cartId};
-    return this.http.post(`${this.cartUrl}/${cartId}/delete/${productId}`, payload).pipe(
+    const url = `${this.cartUrl}/${cartId}/items/${productId}`;
+    return this.http.delete(url).pipe(
       catchError(this.handleError)
     );
   }
