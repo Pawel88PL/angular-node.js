@@ -1,4 +1,4 @@
-function setupModelAssociations({ Product, Category, ProductImage, Cart, CartItem }) {
+function setupModelAssociations({ Product, Category, ProductImage, Cart, CartItem, User }) {
     // Relacje dla Product, Category, i ProductImage
     Product.belongsTo(Category, {
         as: 'category',
@@ -29,6 +29,17 @@ function setupModelAssociations({ Product, Category, ProductImage, Cart, CartIte
     Product.hasMany(CartItem, {
         as: 'cartItems',
         foreignKey: 'productId',
+    });
+
+    // Relacje dla User i Cart
+    Cart.belongsTo(User,{
+        as: 'user',
+        foreignKey: 'UserId',
+    });
+
+    User.hasMany(Cart,{
+        as: 'carts',
+        foreignKey: 'UserId',
     });
 }
 

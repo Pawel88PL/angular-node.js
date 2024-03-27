@@ -24,5 +24,5 @@ app.use('/users', usersRoutes);
 
 
 app.listen(port, () => {
-    console.log(`Backend node.js nasłuchuje na porcie: http://localhost:${port}`);
+    console.log(`Node.js API is listening at port: http://localhost:${port} ...`);
 });

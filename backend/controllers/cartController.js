@@ -1,4 +1,4 @@
-const { addCartItem, getCartItems, removeItemFromCart, updateItemQuantity } = require('../services/cartService');
+const { addCartItem, assignCartToUser, getCartItems, removeItemFromCart, updateItemQuantity } = require('../services/cartService');
 
 exports.addItemToCart = async (req, res) => {
     try {
@@ -10,6 +10,19 @@ exports.addItemToCart = async (req, res) => {
         res.status(500).json({ message: 'Nie udało się dodać produktu do koszyka.', error: error.message });
     }
 };
+
+exports.assignCart = async (req, res) => {
+    try {
+        const { cartId } = req.params;
+        const { userId } = req.body;
+        const cart = await assignCartToUser(cartId, userId);
+        res.json({ message: 'Koszyk został przypisany do użytkownika.', cart });
+    } catch (error) {
+        console.error('Error assigning cart to user:', error);
+        res.status(500).json({ message: 'Nie udało się przypisać koszyka do użytkownika.', error: error.message });
+    }
+};
+
 
 exports.getCartItems = async (req, res) => {
     try {

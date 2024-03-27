@@ -61,6 +61,23 @@ const addCartItem = async (cartId, productId, quantity) => {
     }
 };
 
+const assignCartToUser = async (cartId, userId) => {
+    try {
+        const cart = await Cart.findByPk(cartId);
+        if (!cart) {
+            throw new Error('Koszyk nie został znaleziony.');
+        }
+
+        cart.UserId = userId;
+        await cart.save();
+        return cart;
+    } catch (error) {
+        console.error("Błąd podczas przypisywania koszyka do użytkownika:", error);
+        throw error;
+    }
+};
+
+
 const getCartItems = async (cartId) => {
     try {
         const cartItems = await CartItem.findAll({
@@ -131,7 +148,7 @@ const updateItemQuantity = async (cartId, productId, quantity) => {
         await cartItem.save();
 
         return cartItem;
-        
+
     } catch (error) {
         throw error;
     }
@@ -139,6 +156,7 @@ const updateItemQuantity = async (cartId, productId, quantity) => {
 
 module.exports = {
     addCartItem,
+    assignCartToUser,
     getCartItems,
     removeItemFromCart,
     updateItemQuantity
