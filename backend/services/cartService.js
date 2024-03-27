@@ -97,7 +97,7 @@ const getCartItems = async (cartId) => {
     }
 };
 
-async function removeItemFromCart(cartId, productId) {
+const removeItemFromCart = async (cartId, productId) => {
     try {
         const result = await CartItem.destroy({
             where: {
@@ -117,9 +117,29 @@ async function removeItemFromCart(cartId, productId) {
     }
 }
 
+const updateItemQuantity = async (cartId, productId, quantity) => {
+    try {
+        const cartItem = await CartItem.findOne({
+            where: { cartId, productId }
+        });
+
+        if (!cartItem) {
+            throw new Error('Produkt nie został znaleziony w koszyku.');
+        }
+
+        cartItem.quantity = quantity;
+        await cartItem.save();
+
+        return cartItem;
+        
+    } catch (error) {
+        throw error;
+    }
+};
 
 module.exports = {
     addCartItem,
     getCartItems,
-    removeItemFromCart
+    removeItemFromCart,
+    updateItemQuantity
 };

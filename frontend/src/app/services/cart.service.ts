@@ -58,7 +58,7 @@ export class CartService {
 
   updateItemQuantity(cartId: string, productId: number, quantity: number): Observable<any> {
     const url = `${this.cartUrl}/${cartId}/items/${productId}`;
-    return this.http.post(url, { quantity }).pipe(
+    return this.http.patch(url, { quantity }).pipe(
       catchError(this.handleError)
     );
   }

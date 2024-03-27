@@ -1,4 +1,4 @@
-const { addCartItem, getCartItems, removeItemFromCart } = require('../services/cartService');
+const { addCartItem, getCartItems, removeItemFromCart, updateItemQuantity } = require('../services/cartService');
 
 exports.addItemToCart = async (req, res) => {
     try {
@@ -39,3 +39,17 @@ exports.removeItemFromCart = async (req, res) => {
         res.status(500).json({ message: 'Nie udało się usunąć produktu z koszyka.', error: error.message });
     }
 }
+
+exports.updateItemQuantityInCart = async (req, res) => {
+    try {
+        const { cartId, productId } = req.params;
+        const { quantity } = req.body;
+
+        const updatedCartItem = await updateItemQuantity(cartId, productId, quantity);
+
+        res.json(updatedCartItem);
+    } catch (error) {
+        console.error('Error updating item quantity in cart:', error);
+        res.status(500).json({ message: 'Nie udało się zaktualizować ilości produktu w koszyku.', error: error.message });
+    }
+};

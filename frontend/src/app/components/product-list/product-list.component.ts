@@ -52,7 +52,7 @@ export class ProductListComponent implements OnInit {
         }, 2000);
       },
       error => {
-        console.error("Błąd podczas pobierania produktów:", error);
+        console.error("Błąd podczas pobierania produktów. Sprawdź czy API jest uruchomione.", error);
         this.dbConnectionError = error.message;
         this.isLoading = false;
       }
