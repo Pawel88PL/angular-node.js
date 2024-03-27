@@ -1,4 +1,4 @@
-const { Cart, CartItem, Product } = require('../config/dbConfig');
+const { Cart, CartItem, Product, ProductImage } = require('../config/dbConfig');
 
 const addCartItem = async (cartId, productId, quantity) => {
     try {
@@ -72,6 +72,45 @@ const addCartItem = async (cartId, productId, quantity) => {
     }
 };
 
+const getCartItems = async (cartId) => {
+    try {
+        const cartItems = await CartItem.findAll({
+            where: { cartId: cartId },
+            include: [{
+                model: Product,
+                as: 'product',
+                include: [{
+                    model: ProductImage,
+                    as: 'productImages'
+                }]
+            }]
+        });
+
+        let totalValue = 0;
+
+        const items = cartItems.map(item => {
+            const itemTotal = item.price * item.quantity;
+            totalValue += itemTotal;
+            return {
+                productId: item.productId,
+                name: item.product.name,
+                price: item.price,
+                quantity: item.quantity,
+                amountAvailable: item.product.amountAvailable,
+                imagePaths: [item.product.productImages[0].imagePath]
+            };
+        });
+
+        return { cartItems: items, totalValue };
+    } catch (error) {
+        console.error('Error in cartService.getCartItems: ', error);
+        throw error;
+    }
+};
+
+
+
 module.exports = {
-    addCartItem
+    addCartItem,
+    getCartItems
 };
