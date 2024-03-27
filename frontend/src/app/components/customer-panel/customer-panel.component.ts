@@ -112,7 +112,8 @@ export class CustomerPanelComponent implements OnInit {
 
   loadOrdersHistory() {
     const userId = localStorage.getItem('userId');
-    if (userId) {
+    const isAdmin = this.authService.isAdmin();
+    if (userId && !isAdmin) {
       this.isLoading = true;
       this.orderService.getOrdersHistory(userId).subscribe({
         next: (orders) => {

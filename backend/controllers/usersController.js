@@ -1,5 +1,15 @@
-const { loginUser } = require('../services/usersService');
-const { registerUser } = require('../services/usersService');
+const { getCustomerById, loginUser, registerUser } = require('../services/usersService');
+
+exports.getCustomer = async (req, res) => {
+    try {
+        const { customerId } = req.params;
+        const customer = await getCustomerById(customerId);
+        res.json(customer);
+    } catch (error) {
+        console.error('Error fetching customer:', error);
+        res.status(500).json({ message: 'Nie udało się pobrać danych klienta.', error: error.message });
+    }
+};
 
 exports.login = async (req, res) => {
     try {

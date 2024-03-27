@@ -3,6 +3,32 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../config/dbConfig');
 
 
+const getCustomerById = async (customerId) => {
+    try {
+        const customer = await User.findByPk(customerId);
+        if (!customer) {
+            throw new Error('Klient nie został znaleziony.');
+        }
+
+        const response = {
+            id: customer.id,
+            email: customer.email,
+            name: customer.firstname,
+            surname: customer.lastname,
+            city: customer.city,
+            street: customer.street,
+            address: customer.address,
+            postalCode: customer.postalCode,
+            phoneNumber: customer.phoneNumber,
+        };
+
+        return response;
+
+    } catch (error) {
+        throw error;
+    }
+};
+
 const loginUser = async (email, password) => {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -58,6 +84,7 @@ const registerUser = async ({ email, password, name, surname, city, street, addr
 };
 
 module.exports = {
+    getCustomerById,
     registerUser,
     loginUser
 };

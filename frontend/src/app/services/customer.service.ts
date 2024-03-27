@@ -9,7 +9,7 @@ import { Customer } from '../models/customer.model';
 })
 export class CustomerService {
 
-  private apiBaseUrl = environment.apiUrl;
+  private apiBaseUrl = environment.apiUrl + '/users';
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +18,7 @@ export class CustomerService {
   }
 
   getCustomer(customerId: string): Observable<Customer> {
-    return this.http.get<Customer>(`${this.apiBaseUrl}/customer/${customerId}`);
+    return this.http.get<Customer>(`${this.apiBaseUrl}/${customerId}`);
   }
 
   updateCustomer(customerId: string, customerData: Customer): Observable<Customer> {
