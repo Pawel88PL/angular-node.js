@@ -23,7 +23,9 @@ const ProductImage = require('../models/productImage.model')(sequelize, Sequeliz
 const User = require('../models/user.model')(sequelize, Sequelize.DataTypes);
 const Cart = require('../models/cart.model')(sequelize, Sequelize.DataTypes);
 const CartItem = require('../models/cartItem.model')(sequelize, Sequelize.DataTypes);
+const Order = require('../models/order.model')(sequelize, Sequelize.DataTypes);
+const OrderDetail = require('../models/orderDetail.model')(sequelize, Sequelize.DataTypes);
 
-setupModelAssociations({ Product, Category, ProductImage, User, Cart, CartItem });
+setupModelAssociations({ Product, Category, ProductImage, User, Cart, CartItem, Order, OrderDetail});
 
-module.exports = { sequelize, Product, Category, ProductImage, User, Cart, CartItem };
+module.exports = { sequelize, Product, Category, ProductImage, User, Cart, CartItem, Order, OrderDetail};
