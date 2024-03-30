@@ -83,10 +83,6 @@
                         <i class="bi bi-cart-plus"></i> Dodaj do koszyka
                     </button>
                 </div>
-                <div>
-                    <h3>Lub zadzwoń i zamów pod nr tel:</h3>
-                    <h2>+48 111 222 333</h2>
-                </div>
                 <div *ngIf="authService.isLoggedIn() && authService.isAdmin()">
                     <a mat-raised-button color="warn" [routerLink]="['/update', product.productId]"
                         class="mt-2 w-100"><i class="bi bi-pen"></i> EDYTUJ</a>

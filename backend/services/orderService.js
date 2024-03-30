@@ -1,4 +1,4 @@
-const { Cart, CartItem, Order, OrderDetail, Product } = require('../config/dbConfig');
+const { Cart, CartItem, Order, OrderDetail, Product, User } = require('../config/dbConfig');
 
 const createOrder = async (cartId, userId, isPickupInStore) => {
     const shippingCost = isPickupInStore ? 0 : 99;
@@ -50,7 +50,34 @@ const createOrder = async (cartId, userId, isPickupInStore) => {
     }
 };
 
+const getAllOrders = async () => {
+    try {
+        const orders = await Order.findAll({
+            include: [{
+                model: User,
+                as: 'user'
+            }],
+            order: [['orderDate', 'DESC']]
+        });
+
+        const ordersDTO = orders.map(order => ({
+            orderId: order.OrderId,
+            orderDate: order.OrderDate,
+            isPickupInStore: order.IsPickupInStore,
+            totalPrice: order.TotalPrice,
+            status: order.Status,
+            customerName: `${order.user.firstname} ${order.user.lastname}`
+        }));
+
+        return ordersDTO;
+
+    } catch (error) {
+        throw error;
+    }
+};
+
 
 module.exports = {
-    createOrder
+    createOrder,
+    getAllOrders
 };

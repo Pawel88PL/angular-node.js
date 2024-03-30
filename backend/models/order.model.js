@@ -21,6 +21,14 @@ module.exports = (sequelize, DataTypes) => {
         TotalPrice: {
             type: DataTypes.DECIMAL(10, 2),
             allowNull: false
+        },
+        Status: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        IsPickupInStore: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
     }, {
         tableName: 'Orders',

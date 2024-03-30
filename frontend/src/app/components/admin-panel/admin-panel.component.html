@@ -28,7 +28,7 @@
                                 [class.table-info]="order.status === 'Wysłane'"
                                 [class.table-secondary]="order.status === 'Zrealizowane'"
                                 [class.table-danger]="order.status === 'Anulowane'" style="cursor: pointer;">
-                                <td class="smallScreenDisplayNone">{{ order.shortOrderId }}</td>
+                                <td class="smallScreenDisplayNone">{{ order.orderId }}</td>
                                 <td class="smallScreenDisplayNone">{{ order.orderDate | date:'medium' }}</td>
                                 <td>{{ order.customerName }}</td>
                                 <td>

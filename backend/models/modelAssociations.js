@@ -45,12 +45,12 @@ function setupModelAssociations({ Product, Category, ProductImage, Cart, CartIte
     // Relacje dla User i Order
     User.hasMany(Order, {
         as: 'orders',
-        foreignKey: 'UserId',
+        foreignKey: 'userId',
     });
 
     Order.belongsTo(User, {
         as: 'user',
-        foreignKey: 'UserId',
+        foreignKey: 'userId',
     });
 
     // Relacje dla Order i OrderDetail
