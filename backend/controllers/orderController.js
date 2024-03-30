@@ -35,3 +35,14 @@ exports.getOrderDetails = async (req, res) => {
         res.status(500).send('Internal server error');
     }
 };
+
+exports.getOrdersHistory = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const orders = await orderService.getOrdersHistory(userId);
+        res.json(orders);
+    } catch (error) {
+        console.error('Error getting orders history:', error);
+        res.status(500).send({ message: 'Problem z pobraniem historii zamówień.' });
+    }
+};

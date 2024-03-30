@@ -132,9 +132,33 @@ const getOrderDetails = async (orderId) => {
     }
 };
 
+const getOrdersHistory = async (UserId) => {
+    try {
+        const orders = await Order.findAll({
+            where: { UserId: UserId },
+            order: [['OrderDate', 'DESC']],
+            include: [{
+                model: User,
+                as: 'user'
+            }]
+        });
+
+        return orders.map(order => ({
+            orderId: order.OrderId,
+            orderDate: order.OrderDate,
+            isPickupInStore: order.IsPickupInStore,
+            totalPrice: order.TotalPrice,
+            status: order.Status
+        }));
+    } catch (error) {
+        throw error;
+    }
+};
+
 
 module.exports = {
     createOrder,
     getAllOrders,
-    getOrderDetails
+    getOrderDetails,
+    getOrdersHistory
 };

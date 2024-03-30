@@ -229,7 +229,7 @@
                                         [class.table-info]="order.status === 'Wysłane'"
                                         [class.table-secondary]="order.status === 'Zrealizowane'"
                                         [class.table-danger]="order.status === 'Anulowane'" style="cursor: pointer;">
-                                        <td>{{ order.shortOrderId }}</td>
+                                        <td>{{ order.orderId }}</td>
                                         <td>{{ order.orderDate | date:'medium' }}</td>
                                         <td>
                                             <span *ngIf="order.isPickupInStore; else no">{{ 'Tak' }}</span>

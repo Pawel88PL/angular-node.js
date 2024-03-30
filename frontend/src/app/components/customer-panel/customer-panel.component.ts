@@ -117,10 +117,7 @@ export class CustomerPanelComponent implements OnInit {
       this.isLoading = true;
       this.orderService.getOrdersHistory(userId).subscribe({
         next: (orders) => {
-          this.orders = orders.map(order => ({
-            ...order,
-            shortOrderId: order.orderId.slice(0, 8)
-          }));
+          this.orders = orders;
           this.isLoading = false;
           if (orders.length === 0) {
             console.log('Nie znaleziono historii zamówień.');
