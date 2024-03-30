@@ -35,7 +35,7 @@ const createOrder = async (cartId, userId, isPickupInStore) => {
             OrderId: order.OrderId,
             ProductId: item.productId,
             Quantity: item.quantity,
-            Price: item.product.price * item.quantity
+            UnitPrice: item.product.price
         }));
 
         await OrderDetail.bulkCreate(orderDetails);
@@ -76,8 +76,65 @@ const getAllOrders = async () => {
     }
 };
 
+const getOrderDetails = async (orderId) => {
+    try {
+        const order = await Order.findOne({
+            where: { OrderId: orderId },
+            include: [
+                {
+                    model: User,
+                    as: 'user'
+                },
+                {
+                    model: OrderDetail,
+                    as: 'orderDetails',
+                    include: [
+                        {
+                            model: Product,
+                            as: 'product'
+                        }
+                    ]
+                }
+            ]
+        });
+
+        if (!order) return null;
+
+        const orderDto = {
+            orderId: order.OrderId,
+            isPickupInStore: order.IsPickupInStore,
+            orderDate: order.OrderDate,
+            totalPrice: order.TotalPrice,
+            status: order.Status,
+            customer: order.user ? {
+                name: order.user.firstname,
+                email: order.user.email,
+                surname: order.user.lastname,
+                city: order.user.city,
+                street: order.user.street,
+                address: order.user.address,
+                postalCode: order.user.postalCode,
+                phoneNumber: order.user.phoneNumber
+            } : null,
+            orderDetails: order.orderDetails.map(od => ({
+                orderDetailId: od.OrderDetailId,
+                orderId: od.OrderId,
+                productId: od.ProductId,
+                quantity: od.Quantity,
+                unitPrice: od.UnitPrice,
+                productName: od.product.name
+            }))
+        };
+
+        return orderDto;
+    } catch (error) {
+        throw error;
+    }
+};
+
 
 module.exports = {
     createOrder,
-    getAllOrders
+    getAllOrders,
+    getOrderDetails
 };

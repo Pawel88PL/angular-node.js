@@ -20,3 +20,18 @@ exports.getAllOrders = async (req, res) => {
         res.status(500).send({ message: 'Error getting all orders.' });
     }
 };
+
+exports.getOrderDetails = async (req, res) => {
+    try {
+        const orderId = req.params.orderId;
+        const orderDetails = await orderService.getOrderDetails(orderId);
+        if (orderDetails) {
+            res.json(orderDetails);
+        } else {
+            res.status(404).send('Order not found');
+        }
+    } catch (error) {
+        console.error('Error getting order details:', error);
+        res.status(500).send('Internal server error');
+    }
+};

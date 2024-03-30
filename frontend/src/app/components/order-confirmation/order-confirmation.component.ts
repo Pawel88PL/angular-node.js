@@ -62,7 +62,6 @@ export class OrderConfirmationComponent implements OnInit {
             this.deliveryMethod = 'Kurier';
           }
           this.orderDetails = details;
-          this.shortOrderId = details.shortOrderId;
         },
         error: (error) => {
           console.error('Wystąpił błąd podczas pobierania szczegółów zamówienia.', error);

@@ -16,23 +16,23 @@
                             <tbody>
                                 <tr>
                                     <th>Numer rachunku:</th>
-                                    <td>37 1050 1171 1000 0091 1468 3544</td>
+                                    <td>00 0000 0000 0000 0000 0000 0000</td>
                                 </tr>
                                 <tr>
                                     <th>Bank:</th>
-                                    <td>ING Bank Śląski S.A.</td>
+                                    <td>... ... ...</td>
                                 </tr>
                                 <tr>
                                     <th>Odbiorca:</th>
-                                    <td>STANIUL PIOTR JAKUB</td>
+                                    <td>... ...</td>
                                 </tr>
                                 <tr>
                                     <th>Adres:</th>
-                                    <td>BORA KOMOROWSKIEGO 21, 46-200 KLUCZBORK</td>
+                                    <td>... ...</td>
                                 </tr>
                                 <tr>
                                     <th>Tytuł przelewu:</th>
-                                    <td>Zamówienie nr: {{ shortOrderId }}</td>
+                                    <td>Zamówienie nr: {{ orderDetails?.orderId }}</td>
                                 </tr>
                                 <tr>
                                     <th>Kwota:</th>
@@ -49,7 +49,7 @@
                                         <img src="../../../assets/images/blik.svg" alt="Blik logo" class="img-fluid">
                                     </div>
                                     <div class="col-sm-9">
-                                        <h2 class="fw-bold">570 436 579</h2>
+                                        <h2 class="fw-bold">... ... ...</h2>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                 <mat-card class="mb-3 order-details">
                     <mat-card-header>
                         <mat-card-title>Szczegóły zamówienia</mat-card-title>
-                        <mat-card-subtitle>Numer zamówienia: <strong>{{ shortOrderId }}</strong></mat-card-subtitle>
+                        <mat-card-subtitle>Numer zamówienia: <strong>{{ orderDetails?.orderId }}</strong></mat-card-subtitle>
                         <mat-card-subtitle>Sposób dostawy: <strong>{{ deliveryMethod }}</strong></mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
@@ -107,7 +107,7 @@
                         <img src="../../../assets/images/logo.jpeg" alt="Logo" class="img-fluid">
                         <div class="text-center">
                             <p>W razie problemów skontaktuj się z nami:</p>
-                            <p class="fw-bold">+48 570 436 579</p>
+                            <p class="fw-bold">+48 ... ... ...</p>
                         </div>
                     </mat-card-content>
                 </mat-card>
