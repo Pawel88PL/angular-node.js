@@ -22,7 +22,13 @@ export class CustomerService {
   }
 
   updateCustomer(customerId: string, customerData: Customer): Observable<Customer> {
-    return this.http.post<Customer>(`${this.apiBaseUrl}/customer/${customerId}`, customerData);
+    return this.http.patch<Customer>(`${this.apiBaseUrl}/${customerId}`, customerData)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: any) {
+    console.error(error);
+    return throwError('An error occurred. Please try again later.');
   }
 
 }

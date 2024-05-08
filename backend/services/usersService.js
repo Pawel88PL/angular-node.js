@@ -83,8 +83,35 @@ const registerUser = async ({ email, password, name, surname, city, street, addr
     return newUser;
 };
 
+const updateCustomerAsync = async (customerId, customerData) => {
+    try {
+        const user = await User.findByPk(customerId);
+
+        if (!user) {
+            return false;
+        }
+
+        user.address = customerData.address;
+        user.city = customerData.city;
+        user.email = customerData.email;
+        user.firstname = customerData.name;
+        user.postalCode = customerData.postalCode;
+        user.phoneNumber = customerData.phoneNumber;
+        user.lastname = customerData.surname;
+        user.street = customerData.street;
+        user.username = customerData.email;
+
+        await user.save();
+        return true;
+    } catch (error) {
+        console.error('Error updating customer:', error);
+        return false;
+    }
+};
+
 module.exports = {
     getCustomerById,
     registerUser,
-    loginUser
+    loginUser,
+    updateCustomerAsync
 };

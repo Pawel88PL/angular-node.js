@@ -1,4 +1,4 @@
-const { getCustomerById, loginUser, registerUser } = require('../services/usersService');
+const { getCustomerById, loginUser, registerUser, updateCustomerAsync } = require('../services/usersService');
 
 exports.getCustomer = async (req, res) => {
     try {
@@ -35,5 +35,23 @@ exports.register = async (req, res) => {
         }
         console.error('Błąd rejestracji użytkownika:', error);
         res.status(500).send({ message: "Wystąpił błąd podczas rejestracji użytkownika." });
+    }
+};
+
+exports.updateCustomer = async (req, res) => {
+    try {
+        const { customerId } = req.params;
+        const customerData = req.body;
+
+        const updated = await updateCustomerAsync(customerId, customerData);
+
+        if (!updated) {
+            return res.status(404).json({ message: 'Customer not found.' });
+        }
+
+        res.json({ message: 'Customer updated successfully.' });
+    } catch (error) {
+        console.error('Error updating customer:', error);
+        res.status(500).json({ message: 'Error updating customer.' });
     }
 };
