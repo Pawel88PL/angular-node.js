@@ -38,8 +38,8 @@ export class OrderService {
   }
 
   updateOrderStatus(orderId: string, status: string): Observable<Order> {
-    const payload = { status: status };
-    return this.http.post<Order>(`${this.orderUrl}/updateOrderStatus/${orderId}`, payload)
+    const payload = { status };
+    return this.http.patch<Order>(`${this.orderUrl}/${orderId}`, payload)
       .pipe(catchError(this.handleError));
   }
 

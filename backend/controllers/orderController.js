@@ -46,3 +46,21 @@ exports.getOrdersHistory = async (req, res) => {
         res.status(500).send({ message: 'Problem z pobraniem historii zamówień.' });
     }
 };
+
+exports.updateOrderStatus = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        const { status } = req.body;
+
+        const updated = await orderService.updateOrderStatus(orderId, status);
+
+        if (!updated) {
+            return res.status(404).json({ message: 'Order not found.' });
+        }
+
+        res.json({ message: 'Order status updated successfully.' });
+    } catch (error) {
+        console.error('Error updating order status:', error);
+        res.status(500).json({ message: 'Error updating order status.' });
+    }
+};

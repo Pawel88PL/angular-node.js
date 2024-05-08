@@ -155,10 +155,30 @@ const getOrdersHistory = async (UserId) => {
     }
 };
 
+ const updateOrderStatus = async (orderId, newStatus) => {
+    try {
+        const order = await Order.findByPk(orderId);
+
+        if (!order) {
+            return false;
+        }
+
+        order.Status = newStatus;
+        await order.save();
+
+        return true;
+        
+    } catch (error) {
+        console.error('Error updating order status:', error);
+        throw error;
+    }
+};
+
 
 module.exports = {
     createOrder,
     getAllOrders,
     getOrderDetails,
-    getOrdersHistory
+    getOrdersHistory,
+    updateOrderStatus
 };
