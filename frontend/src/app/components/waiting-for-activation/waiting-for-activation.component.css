@@ -3,3 +3,18 @@
     max-width: 800px;
     width: 95%;
 }
+
+mat-card {
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+mat-progress-bar {
+    margin-top: 20px;
+}

@@ -42,6 +42,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -96,6 +97,7 @@ registerLocaleData(localePl);
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatMenuModule,
     MatToolbarModule,
     MatSelectModule,

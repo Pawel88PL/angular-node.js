@@ -7,18 +7,10 @@
                     <img src="../../../assets/images/logo.jpeg" alt="logo" class="w-100 p-2">
                 </div>
                 <div class="col-md-7">
-                    <h2 class="my-4">Następne kroki do wykonania:</h2>
-                    <ol class="list-unstyled">
-                        <li>
-                            <h3 class="mb-2"><span class="me-2">1.</span>Zaloguj się na swoje konto pocztowe.</h3>
-                        </li>
-                        <li>
-                            <h3 class="mb-2"><span class="me-2">2.</span>Otwórz wiadomość jaką otrzymałeś od nas.</h3>
-                        </li>
-                        <li>
-                            <h3 class="mb-2"><span class="me-2">3.</span>Kliknij na link aktywacyjny.</h3>
-                        </li>
-                    </ol>
+                    <mat-card>
+                        <p>W ciągu 5 sekund nastąpi przekierowanie do strony logowania.</p>
+                        <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar>
+                    </mat-card>
                 </div>
             </div>
         </div>
