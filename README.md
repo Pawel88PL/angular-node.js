@@ -37,10 +37,12 @@ cd &lt;repo-directory&gt;
 
 <h3>2. Konfiguracja Usług Docker</h3>
 <ul>
-    <li>Upewnij się, że Docker działa.</li>
-    <li>Z katalogu głównego projektu uruchom usługi:</li>
+    <li>Upewnij się, że Docker jest włączony.</li>
+    <li>Przejdź do katalogu<code>backend</code></li>
+    <li>Uruchom kontener docker:</li>
 </ul>
 <pre><code>
+cd backend
 docker-compose up -d
 </code></pre>
 
