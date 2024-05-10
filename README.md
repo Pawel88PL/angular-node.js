@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Projekt E-commerce - Zadanie z Kursu JavaScript</title>
-</head>
-<body>
-
 <h1>Projekt E-commerce - Zadanie z przedmiotu JavaScript</h1>
 
 <h2>Opis Projektu</h2>
@@ -110,6 +103,3 @@ Odwiedź <a href="http://localhost:4200">http://localhost:4200</a>, aby uzyskać
     <li>phpMyAdmin jest dostępny do zarządzania bazą danych i testowania zapytań.</li>
     <li>Paski postępu, statusy zamówień i inne funkcje zostały zaimplementowane przy użyciu komponentów Angular Material.</li>
 </ul>
-
-</body>
-</html>
