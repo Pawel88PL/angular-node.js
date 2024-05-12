@@ -76,10 +76,11 @@ npm start
 
 <h3>4. Konfiguracja Frontend</h3>
 <ul>
+    <li>Otwórz nowe okno terminala <code>Terminal -> New Terminal</code>:</li>
     <li>Przejdź do katalogu <code>frontend</code>:</li>
 </ul>
 <pre><code>
-cd ../frontend
+cd angular-node.js/frontend
 </code></pre>
 <ul>
     <li>Zainstaluj zależności:</li>
