@@ -1,6 +1,6 @@
-const { Cart, CartItem, Order, OrderDetail, Product, User } = require('../config/dbConfig');
+import { Cart, CartItem, Order, OrderDetail, Product, User } from '../config/dbConfig.js';
 
-const createOrder = async (cartId, userId, isPickupInStore) => {
+export async function createOrderInDb(cartId, userId, isPickupInStore) {
     const shippingCost = isPickupInStore ? 0 : 99;
 
     try {
@@ -50,7 +50,7 @@ const createOrder = async (cartId, userId, isPickupInStore) => {
     }
 };
 
-const getAllOrders = async () => {
+export async function getOrdersFromDb() {
     try {
         const orders = await Order.findAll({
             include: [{
@@ -76,7 +76,7 @@ const getAllOrders = async () => {
     }
 };
 
-const getOrderDetails = async (orderId) => {
+export async function getOrderById(orderId) {
     try {
         const order = await Order.findOne({
             where: { OrderId: orderId },
@@ -132,7 +132,7 @@ const getOrderDetails = async (orderId) => {
     }
 };
 
-const getOrdersHistory = async (UserId) => {
+export async function getOrdersByUser(UserId) {
     try {
         const orders = await Order.findAll({
             where: { UserId: UserId },
@@ -155,7 +155,7 @@ const getOrdersHistory = async (UserId) => {
     }
 };
 
- const updateOrderStatus = async (orderId, newStatus) => {
+export async function updateOrderNewStatusInDb(orderId, newStatus) {
     try {
         const order = await Order.findByPk(orderId);
 
@@ -167,18 +167,9 @@ const getOrdersHistory = async (UserId) => {
         await order.save();
 
         return true;
-        
+
     } catch (error) {
         console.error('Error updating order status:', error);
         throw error;
     }
-};
-
-
-module.exports = {
-    createOrder,
-    getAllOrders,
-    getOrderDetails,
-    getOrdersHistory,
-    updateOrderStatus
 };

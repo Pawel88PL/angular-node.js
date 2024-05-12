@@ -55,7 +55,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
         },
         error => {
           this.isLoading = false;
-          this.snackBar.open(error.message, 'Zamknij', {
+          let message = 'Błędne hasło lub e-mail.';
+          this.snackBar.open(message, 'Zamknij', {
             duration: 5000,
           });
         }

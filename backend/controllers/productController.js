@@ -1,8 +1,13 @@
+import {
+    addProductWithImages,
+    deleteProductById,
+    getProductsFromDb,
+    getProductById,
+    updateProductWithImages
+} from '../services/productService.js';
 
-const { addProductWithImages, deleteProduct, getProducts, getProductById, updateProductWithImages } = require('../services/productsService');
 
-
-exports.addProduct = async (req, res) => {
+export async function addProduct (req, res) {
     try {
         
         const productData = req.body;
@@ -16,10 +21,10 @@ exports.addProduct = async (req, res) => {
     }
 };
 
-exports.deleteProductById = async (req, res) => {
+export async function deleteProduct (req, res) {
     try {
         const { id } = req.params;
-        await deleteProduct(id);
+        await deleteProductById(id);
         res.status(200).send({ message: 'Produkt został usunięty.' });
     } catch (error) {
         console.error('Błąd podczas usuwania produktu:', error);
@@ -27,9 +32,9 @@ exports.deleteProductById = async (req, res) => {
     }
 };
 
-exports.getProducts = async (req, res) => {
+export async function getProducts (req, res) {
     try {
-        const products = await getProducts();
+        const products = await getProductsFromDb();
         res.json(products);
     } catch (error) {
         console.error('Błąd podczas pobierania produktów:', error);
@@ -37,7 +42,7 @@ exports.getProducts = async (req, res) => {
     }
 };
 
-exports.getProductById = async (req, res) => {
+export async function getProduct (req, res) {
     try {
         const product = await getProductById(req.params.id);
         if (product) {
@@ -51,7 +56,7 @@ exports.getProductById = async (req, res) => {
     }
 };
 
-exports.updateProductById = async (req, res) => {
+export async function updateProduct (req, res) {
     try {
         const { id } = req.params;
         const { ImagePaths, ...productData } = req.body;

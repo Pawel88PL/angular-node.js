@@ -1,9 +1,15 @@
-const orderService = require('../services/orderService');
+import {
+    createOrderInDb,
+    getOrdersFromDb,
+    getOrderById,
+    getOrdersByUser,
+    updateOrderNewStatusInDb
+} from '../services/orderService.js';
 
-exports.createOrder = async (req, res) => {
+export async function createOrder(req, res) {
     try {
         const { cartId, userId, isPickupInStore } = req.body;
-        const order = await orderService.createOrder(cartId, userId, isPickupInStore);
+        const order = await createOrderInDb(cartId, userId, isPickupInStore);
         res.status(201).json(order);
     } catch (error) {
         console.error('Error creating order:', error);
@@ -11,9 +17,9 @@ exports.createOrder = async (req, res) => {
     }
 };
 
-exports.getAllOrders = async (req, res) => {
+export async function getAllOrders(req, res) {
     try {
-        const orders = await orderService.getAllOrders();
+        const orders = await getOrdersFromDb();
         res.status(200).json(orders);
     } catch (error) {
         console.error('Error getting all orders:', error);
@@ -21,10 +27,10 @@ exports.getAllOrders = async (req, res) => {
     }
 };
 
-exports.getOrderDetails = async (req, res) => {
+export async function getOrderDetails(req, res) {
     try {
         const orderId = req.params.orderId;
-        const orderDetails = await orderService.getOrderDetails(orderId);
+        const orderDetails = await getOrderById(orderId);
         if (orderDetails) {
             res.json(orderDetails);
         } else {
@@ -36,10 +42,10 @@ exports.getOrderDetails = async (req, res) => {
     }
 };
 
-exports.getOrdersHistory = async (req, res) => {
+export async function getOrdersHistory(req, res) {
     try {
         const { userId } = req.params;
-        const orders = await orderService.getOrdersHistory(userId);
+        const orders = await getOrdersByUser(userId);
         res.json(orders);
     } catch (error) {
         console.error('Error getting orders history:', error);
@@ -47,12 +53,12 @@ exports.getOrdersHistory = async (req, res) => {
     }
 };
 
-exports.updateOrderStatus = async (req, res) => {
+export async function updateOrderStatus(req, res) {
     try {
         const { orderId } = req.params;
         const { status } = req.body;
 
-        const updated = await orderService.updateOrderStatus(orderId, status);
+        const updated = await updateOrderNewStatusInDb(orderId, status);
 
         if (!updated) {
             return res.status(404).json({ message: 'Order not found.' });

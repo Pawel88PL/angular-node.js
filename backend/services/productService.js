@@ -1,13 +1,11 @@
-const { sequelize } = require('../config/dbConfig');
-const { Product, Category, ProductImage } = require('../config/dbConfig');
+import { sequelize } from '../config/dbConfig.js';
+import { Product, Category, ProductImage } from '../config/dbConfig.js';
 
-const addProductWithImages = async (productData, imagePaths) => {
-    // Rozpoczęcie transakcji
+
+export async function addProductWithImages(productData, imagePaths) {
     const transaction = await sequelize.transaction();
     try {
-        // Tworzenie nowego produktu
         const newProduct = await Product.create({
-            // Przypisanie danych produktu
             categoryId: productData.categoryId,
             name: productData.name,
             price: productData.price,
@@ -16,36 +14,30 @@ const addProductWithImages = async (productData, imagePaths) => {
             description: productData.description,
         }, { transaction });
 
-        // Przygotowanie danych obrazów do zapisu
         const imagesData = imagePaths.map(imagePath => ({
             productId: newProduct.productId,
             imagePath: imagePath
         }));
 
-        // Zapis obrazów do bazy danych
         await ProductImage.bulkCreate(imagesData, { transaction });
-
-        // Zatwierdzenie transakcji
         await transaction.commit();
         return newProduct;
+
     } catch (error) {
-        // Wycofanie transakcji w przypadku błędu
         await transaction.rollback();
         throw error;
     }
 };
 
-const deleteProduct = async (id) => {
+export async function deleteProductById (id) {
     const transaction = await sequelize.transaction();
 
     try {
-        // Najpierw usuń wszystkie powiązane obrazy produktu
         await ProductImage.destroy({
             where: { ProductId: id },
             transaction: transaction
         });
 
-        // Następnie usuń produkt
         await Product.destroy({
             where: { ProductId: id },
             transaction: transaction
@@ -58,7 +50,7 @@ const deleteProduct = async (id) => {
     }
 };
 
-const getProducts = async () => {
+export async function getProductsFromDb () {
     return await Product.findAll({
         include: [
             {
@@ -72,7 +64,7 @@ const getProducts = async () => {
     });
 };
 
-const getProductById = async (id) => {
+export async function getProductById (id) {
     return await Product.findByPk(id, {
         include: [
             {
@@ -86,41 +78,27 @@ const getProductById = async (id) => {
     });
 };
 
-const updateProductWithImages = async (id, productData, imagePaths) => {
+export async function updateProductWithImages (id, productData, imagePaths) {
     const transaction = await sequelize.transaction();
     try {
-        // Wyszukanie produktu do zaktualizowania
         const productToUpdate = await Product.findByPk(id, { transaction });
         if (!productToUpdate) {
             throw new Error('Produkt nie został znaleziony.');
         }
 
-        // Aktualizacja produktu z danymi z formularza
         await productToUpdate.update(productData, { transaction });
 
-        // Przygotowanie danych nowych obrazów do zapisu
         const imagesData = imagePaths.map(imagePath => ({
             productId: id,
             imagePath: imagePath
         }));
 
-        // Dodanie nowych obrazów do bazy danych
         await ProductImage.bulkCreate(imagesData, { transaction });
 
-        // Zatwierdzenie transakcji
         await transaction.commit();
         return productToUpdate;
     } catch (error) {
-        // Wycofanie transakcji w przypadku błędu
         await transaction.rollback();
         throw error;
     }
-};
-
-module.exports = {
-    addProductWithImages,
-    deleteProduct,
-    getProducts,
-    getProductById,
-    updateProductWithImages
 };

@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
     const CartItem = sequelize.define('CartItem', {
         cartItemId: {
             type: DataTypes.INTEGER,

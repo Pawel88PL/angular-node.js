@@ -1,11 +1,19 @@
-const express = require('express');
-const orderController = require('../controllers/orderController');
+import express from 'express';
+import {
+    createOrder,
+    getAllOrders,
+    getOrderDetails,
+    getOrdersHistory,
+    updateOrderStatus
+} from '../controllers/orderController.js';
+
 const router = express.Router();
 
-router.post('/', orderController.createOrder);
-router.get('/allOrders', orderController.getAllOrders);
-router.get('/:orderId', orderController.getOrderDetails);
-router.get('/history/:userId', orderController.getOrdersHistory);
-router.patch('/:orderId', orderController.updateOrderStatus);
+// Mapowanie ścieżek na funkcje kontrolera
+router.post('/', createOrder);
+router.get('/allOrders', getAllOrders);
+router.get('/:orderId', getOrderDetails);
+router.get('/history/:userId', getOrdersHistory);
+router.patch('/:orderId', updateOrderStatus);
 
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
-const { Cart, CartItem, Product, ProductImage } = require('../config/dbConfig');
+import { Cart, CartItem, Product, ProductImage } from '../config/dbConfig.js';
 
-const addCartItem = async (cartId, productId, quantity) => {
+export const addItem = async (cartId, productId, quantity) => {
     try {
 
         let cart = await Cart.findOne({
@@ -61,7 +61,7 @@ const addCartItem = async (cartId, productId, quantity) => {
     }
 };
 
-const assignCartToUser = async (cartId, userId) => {
+export const assignCartToUser = async (cartId, userId) => {
     try {
         const cart = await Cart.findByPk(cartId);
         if (!cart) {
@@ -78,7 +78,7 @@ const assignCartToUser = async (cartId, userId) => {
 };
 
 
-const getCartItems = async (cartId) => {
+export const getItems = async (cartId) => {
     try {
         const cartItems = await CartItem.findAll({
             where: { cartId: cartId },
@@ -114,7 +114,7 @@ const getCartItems = async (cartId) => {
     }
 };
 
-const removeItemFromCart = async (cartId, productId) => {
+export const removeItem = async (cartId, productId) => {
     try {
         const result = await CartItem.destroy({
             where: {
@@ -134,7 +134,7 @@ const removeItemFromCart = async (cartId, productId) => {
     }
 }
 
-const updateItemQuantity = async (cartId, productId, quantity) => {
+export const updateItemQuantity = async (cartId, productId, quantity) => {
     try {
         const cartItem = await CartItem.findOne({
             where: { cartId, productId }
@@ -152,12 +152,4 @@ const updateItemQuantity = async (cartId, productId, quantity) => {
     } catch (error) {
         throw error;
     }
-};
-
-module.exports = {
-    addCartItem,
-    assignCartToUser,
-    getCartItems,
-    removeItemFromCart,
-    updateItemQuantity
 };

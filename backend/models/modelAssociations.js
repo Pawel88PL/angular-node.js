@@ -75,4 +75,4 @@ function setupModelAssociations({ Product, Category, ProductImage, Cart, CartIte
     });
 }
 
-module.exports = setupModelAssociations;
+export default setupModelAssociations;

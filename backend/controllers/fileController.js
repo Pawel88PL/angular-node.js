@@ -1,9 +1,11 @@
-const filesService = require('../services/filesService');
+import {
+    uploadImages,
+    deleteImage
+} from '../services/fileService.js';
 
-exports.uploadFiles = async (req, res) => {
+export async function uploadFiles (req, res) {
     try {
-        // Wywołanie serwisu do przetwarzania przesłanych plików
-        const uploadedFilesInfo = await filesService.uploadFiles(req.files);
+        const uploadedFilesInfo = await uploadImages(req.files);
         res.status(200).json({
             message: "Pliki zostały przesłane pomyślnie.",
             files: uploadedFilesInfo
@@ -14,10 +16,10 @@ exports.uploadFiles = async (req, res) => {
     }
 };
 
-exports.deleteFile = async (req, res) => {
+export async function deleteFile (req, res) {
     try {
         const { id } = req.params;
-        const result = await filesService.deleteFile(id);
+        const result = await deleteImage(id);
         res.status(200).send(result);
     } catch (error) {
         console.error('Błąd podczas usuwania obrazka:', error);
