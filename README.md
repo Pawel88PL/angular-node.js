@@ -31,8 +31,8 @@ Projekt ten jest zadaniem zaliczeniowym z przedmiotu JavaScript na kierunku info
 
 <h3>1. Sklonuj Repozytorium</h3>
 <pre><code>
-git clone &lt;repo-url&gt;
-cd &lt;repo-directory&gt;
+git clone https://github.com/Pawel88PL/angular-node.js
+cd angular-node.js
 </code></pre>
 
 <h3>2. Konfiguracja Usług Docker</h3>
