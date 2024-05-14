@@ -50,8 +50,10 @@ docker-compose up -d
 
 Uzyskaj dostęp do phpMyAdmin pod <a href="http://localhost:8080">http://localhost:8080</a>, używając:
 <ul>
-    <li>Nazwa użytkownika: <code>root</code></li>
+    <li>Nazwa użytkownika: <code>admin</code></li>
     <li>Hasło: <code>root</code></li>
+    <li>Stwórz strukturę bazy danych - otwórz zakładkę <code>SQL</code></li>
+    <li>Wklej wyespotowaną bazę danych z pliku <code>e-commerce.sql</code><li>
 </ul>
 
 ### 3. Konfiguracja Backend
