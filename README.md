@@ -1,4 +1,4 @@
-# Projekt E-commerce - Zadanie z przedmiotu JavaScript
+# Projekt E-commerce
 
 ## Opis Projektu
 
@@ -20,22 +20,28 @@ Projekt ten jest zadaniem zaliczeniowym z przedmiotu JavaScript na kierunku info
     <li><code>docker-compose.yml</code>: Konfiguracja usług MySQL i phpMyAdmin.</li>
 </ul>
 
-## Wymagania
+## Wymagania do uruchomienia projektu
 <ul>
-    <li>Node.js (wersja 14 lub nowsza)</li>
-    <li>Docker</li>
-    <li>Docker Compose</li>
+    <li>Zainstaluj najnowszą wersję Node.js https://nodejs.org/en/download</li>
+    <li>Pobierz i uruchom Docker https://docs.docker.com/get-docker/</li>
+    <li>Potrzebny będzie edytor kodu https://code.visualstudio.com/download</li>
 </ul>
 
 ## Instalacja i Konfiguracja
 
 ### 1. Sklonuj Repozytorium
+<ul>
+    <li>Uruchom Visual Studio Code</li>
+    <li>Otwórz nowe okno terminala <code>Terminal -> New Terminal</code>:</li>
+    <li>Wpisz poniższe polecenie:</li>
+</ul>
+
 <pre><code>
 git clone https://github.com/Pawel88PL/angular-node.js
 cd angular-node.js
 </code></pre>
 
-### 2. Konfiguracja Usług Docker
+### 2. Konfiguracja bazy danych
 <ul>
     <li>Upewnij się, że Docker jest włączony.</li>
     <li>Przejdź do katalogu<code>backend</code></li>
@@ -60,18 +66,23 @@ Uzyskaj dostęp do phpMyAdmin pod <a href="http://localhost:8080">http://localho
 <ul>
     <li>Przejdź do katalogu <code>backend</code>:</li>
 </ul>
+
 <pre><code>
 cd backend
 </code></pre>
+
 <ul>
     <li>Zainstaluj zależności:</li>
 </ul>
+
 <pre><code>
 npm install
 </code></pre>
+
 <ul>
     <li>Uruchom serwer backend:</li>
 </ul>
+
 <pre><code>
 npm start
 </code></pre>
@@ -81,18 +92,33 @@ npm start
     <li>Otwórz nowe okno terminala <code>Terminal -> New Terminal</code>:</li>
     <li>Przejdź do katalogu <code>frontend</code>:</li>
 </ul>
+
 <pre><code>
 cd angular-node.js/frontend
 </code></pre>
+
+<ul>
+    <li>Zainstaluj Angular CLI:</li>
+</ul>
+
+<pre><code>
+npm install -g @angular/cli
+</code></pre>
+
 <ul>
     <li>Zainstaluj zależności:</li>
 </ul>
+
 <pre><code>
 npm install
 </code></pre>
+
 <ul>
     <li>Uruchom serwer frontend:</li>
 </ul>
+
 <pre><code>
 ng serve --open
 </code></pre>
+
+Otwórz przeglądarkę internetową i wklej ten adres: http://localhost:4200/
